@@ -1,24 +1,24 @@
-# Build outputs
+# build output
 dist/
-website/dist/
+# generated types
 .astro/
-website/.astro/
 
-# Dependencies
+# dependencies
 node_modules/
-website/node_modules/
 
-# Environment and secrets
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+
+# environment variables
 .env
-.env.*
-!.env.example
+.env.production
 
-# Editor and OS
+# macOS-specific files
 .DS_Store
-Thumbs.db
-*.log
-.vscode/*
-!.vscode/extensions.json
-!.vscode/launch.json
-.playwright-mcp/
-website/.playwright-mcp/
+
+# jetbrains setting folder
+.idea/

@@ -47,7 +47,7 @@ export default function Nav() {
     >
       <nav
         aria-label="主导航"
-        className="mx-auto flex h-16 max-w-[1400px] items-center gap-6 px-5 sm:px-8"
+        className="mx-auto flex h-16 max-w-350 items-center gap-6 px-5 sm:px-8"
       >
         <a href="/" className="group flex items-baseline gap-2.5">
           <span className="font-display text-xl font-bold tracking-tight">

@@ -64,7 +64,18 @@ export default function InstallTabs() {
 
   const copy = async () => {
     try {
-      await navigator.clipboard.writeText(tab.code);
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(tab.code);
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = tab.code;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      }
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1800);
     } catch {
@@ -75,15 +86,15 @@ export default function InstallTabs() {
   return (
     <div className="panel overflow-hidden">
       <div
-        role="tablist"
+        role="group"
         aria-label="安装方式"
         className="flex flex-wrap gap-1 border-b border-line bg-base-950/50 p-1.5"
       >
         {TABS.map((t) => (
           <button
             key={t.id}
-            role="tab"
-            aria-selected={t.id === active}
+            type="button"
+            aria-pressed={t.id === active}
             onClick={() => setActive(t.id)}
             className={`rounded-full px-3.5 py-2 font-mono text-[11px] tracking-wide transition-all duration-200 active:scale-[0.98] ${
               t.id === active
@@ -96,15 +107,16 @@ export default function InstallTabs() {
         ))}
       </div>
 
-      <div className="relative">
+      <div className="relative" role="region" aria-label={`${tab.label}安装命令`}>
         <button
           type="button"
           onClick={copy}
+          aria-label={copied ? "已复制到剪贴板" : `复制${tab.label}安装命令`}
           className="absolute right-3 top-3 z-10 rounded-full border border-line bg-base-800/90 px-3 py-1.5 font-mono text-[11px] text-muted transition-all duration-200 hover:border-amber/60 hover:text-amber active:scale-[0.98]"
         >
           {copied ? "已复制 ✓" : "复制"}
         </button>
-        <pre className="overflow-x-auto px-5 pb-5 pt-4 text-[12.5px] leading-[1.85] sm:text-[13px]">
+        <pre className="overflow-x-auto px-5 pb-5 pr-20 pt-4 text-[12.5px] leading-[1.85] sm:text-[13px]">
           <code className="font-mono text-ink/90">
             <span className="select-none text-faint">$ </span>
             {tab.code}

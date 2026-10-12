@@ -65,7 +65,7 @@ const marquee = [
       <div class="reveal mt-9 flex flex-wrap items-center gap-3" style="--reveal-delay: 260ms">
         <a
           href="#quickstart"
-          class="group inline-flex items-center gap-2 rounded-full bg-amber px-6 py-3.5 text-[15px] font-medium text-base-950 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_-12px_rgba(224,162,74,0.45)] active:scale-[0.98]"
+          class="group inline-flex items-center gap-2 rounded-full bg-amber px-6 py-3.5 text-[15px] font-semibold text-base-950 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_-12px_rgba(224,162,74,0.45)] active:scale-[0.98]"
         >
           一条命令开始安装
         </a>
@@ -159,10 +159,13 @@ const marquee = [
   </div>
 
   <div class="relative mt-16 overflow-hidden border-y border-line py-5">
-    <div class="marquee-track flex w-max gap-10 whitespace-nowrap">
+    <div class="marquee-track flex w-max gap-10 whitespace-nowrap" aria-label="已集成的开源组件">
       {
-        [...marquee, ...marquee].map((name) => (
-          <span class="flex items-center gap-10 font-mono text-sm tracking-wide text-faint">
+        [...marquee, ...marquee].map((name, i) => (
+          <span
+            aria-hidden={i >= marquee.length ? "true" : undefined}
+            class="flex items-center gap-10 font-mono text-sm tracking-wide text-faint"
+          >
             {name}
             <span class="h-1 w-1 rounded-full bg-amber/50" />
           </span>

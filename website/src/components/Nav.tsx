@@ -28,6 +28,15 @@ export default function Nav() {
     };
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
@@ -72,6 +81,7 @@ export default function Nav() {
           type="button"
           aria-label={open ? "关闭菜单" : "打开菜单"}
           aria-expanded={open}
+          aria-controls="mobile-menu"
           onClick={() => setOpen((v) => !v)}
           className="ml-auto flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink transition-colors hover:border-amber/60 lg:hidden"
         >
@@ -83,12 +93,12 @@ export default function Nav() {
             />
             <span
               className={`absolute left-0 h-px w-4 bg-current transition-opacity duration-200 ${
-                open ? "top-1.5 opacity-0" : "top-3 opacity-100"
+                open ? "top-1.5 opacity-0" : "top-1.5 opacity-100"
               }`}
             />
             <span
               className={`absolute left-0 h-px w-4 bg-current transition-transform duration-300 ${
-                open ? "top-1.5 -rotate-45" : "top-6"
+                open ? "top-1.5 -rotate-45" : "top-3"
               }`}
             />
           </span>
@@ -96,7 +106,10 @@ export default function Nav() {
       </nav>
 
       {open && (
-        <div className="border-t border-line bg-base-950/95 px-5 pb-8 pt-4 lg:hidden">
+        <div
+          id="mobile-menu"
+          className="border-t border-line bg-base-950/95 px-5 pb-8 pt-4 lg:hidden"
+        >
           <ul className="flex flex-col divide-y divide-line">
             {LINKS.map((link) => (
               <li key={link.href}>

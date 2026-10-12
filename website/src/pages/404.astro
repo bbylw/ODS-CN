@@ -1,0 +1,33 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="页面未找到 · ODS">
+  <section class="mx-auto max-w-[1400px] px-5 py-40 text-center sm:px-8">
+    <p class="eyebrow reveal">404</p>
+    <h1
+      class="mx-auto mt-5 max-w-[20ch] font-display text-[clamp(2rem,4.2vw,3.4rem)] font-bold leading-[1.15] tracking-tight"
+    >
+      这个页面不在你的本地服务器上
+    </h1>
+    <p class="mx-auto mt-6 max-w-[52ch] text-[15px] leading-[1.95] text-muted">
+      你访问的地址不存在或已被移动。回到首页获取 ODS 安装命令与文档。
+    </p>
+    <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 rounded-full bg-amber px-6 py-3.5 text-[15px] font-semibold text-base-950 transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
+      >
+        回到首页
+      </a>
+      <a
+        href="https://github.com/Osmantic/ODS"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 rounded-full border border-line px-6 py-3.5 text-[15px] text-ink transition-all duration-200 hover:-translate-y-0.5 hover:border-amber/50 hover:text-amber active:scale-[0.98]"
+      >
+        GitHub 仓库
+      </a>
+    </div>
+  </section>
+</Layout>

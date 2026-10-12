@@ -12,6 +12,13 @@ const {
   title,
   description = "ODS（Osmantic 部署系统）把你的 PC、Mac 或 Linux 机器变成一台私有 AI 服务器：本地推理、聊天界面、控制台、语音、智能体、RAG、图像生成与隐私运维，一条命令全部就位。",
 } = Astro.props;
+
+const canonicalURL = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site).toString()
+  : undefined;
+const ogImageURL = Astro.site
+  ? new URL("/favicon.svg", Astro.site).toString()
+  : "/favicon.svg";
 ---
 
 <!doctype html>
@@ -24,7 +31,35 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:locale" content="zh_CN" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {canonicalURL && <link rel="canonical" href={canonicalURL} />}
+    <meta name="theme-color" content="#0c0e0a" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <title>{title}</title>
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: "ODS · Osmantic 部署系统",
+        inLanguage: "zh-CN",
+        url: Astro.site?.toString(),
+        description,
+      })}
+    />
+    <noscript>
+      <style>
+        .reveal {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
   </head>
   <body class="noise">
     <Nav client:load />

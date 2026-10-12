@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import Nav from "../components/Nav.tsx";
+import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 
 interface Props {
@@ -70,7 +70,7 @@ const ogImageURL = Astro.site
     </noscript>
   </head>
   <body class="noise">
-    <Nav client:load />
+    <Nav />
     <main>
       <slot />
     </main>

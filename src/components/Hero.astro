@@ -1,5 +1,5 @@
 ---
-import InstallTabs from "./InstallTabs.tsx";
+import InstallTabs from "./InstallTabs.astro";
 
 const services = [
   { name: "llama-server", detail: "本地推理 · 连续批处理", state: "运行中" },
@@ -202,7 +202,7 @@ const marquee = [
   </div>
 
   <div class="reveal mx-auto max-w-350 px-5 sm:px-8">
-    <InstallTabs client:load />
+    <InstallTabs />
   </div>
 
   <div class="relative mt-16 overflow-hidden border-y border-line py-5">

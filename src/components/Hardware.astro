@@ -48,14 +48,14 @@ const tables = [
           硬件自动检测，
           <span class="text-amber">模型自动匹配</span>
         </h2>
-        <p class="reveal mt-6 text-[15px] leading-[2] text-muted">
+        <p class="reveal mt-6 text-[15px] leading-loose text-muted">
           安装器会检测你的 GPU，并首先分配一个确定性的硬件层级。随后 Linux 与 macOS
           运行带版本的目录选择器，Windows 使用 PowerShell 目录选择器；二者都读取
           <code class="rounded bg-base-800 px-1.5 py-0.5 font-mono text-[12.5px] text-ink"
             >model-library.json</code
           >，在检测到的内存区间内挑选可安装的最佳 GGUF。
         </p>
-        <p class="reveal mt-4 text-[15px] leading-[2] text-muted">
+        <p class="reveal mt-4 text-[15px] leading-loose text-muted">
           最终选择写入
           <code class="rounded bg-base-800 px-1.5 py-0.5 font-mono text-[12.5px] text-ink"
             >.env</code
@@ -95,7 +95,7 @@ const tables = [
                 <span class="h-px flex-1 bg-line" />
               </div>
               <div class="mt-4 overflow-x-auto">
-                <table class="w-full min-w-[520px] border-collapse text-left">
+                <table class="w-full min-w-130 border-collapse text-left">
                   <caption class="sr-only">{t.platform}默认模型选择表</caption>
                   <thead>
                     <tr>

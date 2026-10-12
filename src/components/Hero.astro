@@ -69,7 +69,7 @@ const marquee = [
       <div class="reveal mt-9 flex flex-wrap items-center gap-3.5" style="--reveal-delay: 260ms">
         <a
           href="/#quickstart"
-          class="btn-tactile group gap-2.5 rounded-full bg-amber px-6 py-3.5 text-[15px] font-semibold text-base-950 shadow-[0_12px_32px_-8px_rgba(224,162,74,0.45)] hover:shadow-[0_18px_44px_-10px_rgba(224,162,74,0.55)]"
+          class="btn-tactile btn-sheen group gap-2.5 rounded-full bg-amber px-6 py-3.5 text-[15px] font-semibold text-base-950 shadow-[0_12px_32px_-8px_rgba(224,162,74,0.45)] hover:shadow-[0_18px_44px_-10px_rgba(224,162,74,0.55)]"
         >
           <span>一条命令开始安装</span>
           <svg
@@ -127,7 +127,7 @@ const marquee = [
 
     <div class="reveal relative lg:pt-10" style="--reveal-delay: 220ms">
       <div
-        class="panel noise relative overflow-hidden rounded-[1.75rem] shadow-[0_40px_120px_-40px_rgba(0,0,0,0.9)]"
+        class="panel noise scanlines relative overflow-hidden rounded-[1.75rem] shadow-[0_40px_120px_-40px_rgba(0,0,0,0.9)]"
       >
         <!-- 控制台窗口标题栏 -->
         <div class="flex items-center justify-between border-b border-line bg-base-950/70 px-5 py-3.5">
@@ -179,14 +179,14 @@ const marquee = [
               { label: "GPU 负载", value: "74%", percent: "74%", color: "bg-amber" },
               { label: "显存占用", value: "21.4 GB", percent: "89%", color: "bg-moss" },
               { label: "上下文", value: "64K", percent: "50%", color: "bg-amber" },
-            ].map((metric) => (
+            ].map((metric, i) => (
               <div class="bg-base-900 px-4 py-3.5">
                 <p class="font-mono text-[10px] tracking-[0.16em] text-faint">{metric.label}</p>
                 <p class="tabular mt-1 font-display text-lg font-bold text-ink">{metric.value}</p>
                 <div class="mt-2 h-1 w-full overflow-hidden rounded-full bg-base-950" aria-hidden="true">
                   <div
-                    class={`h-full rounded-full ${metric.color}/80`}
-                    style={`width: ${metric.percent}`}
+                    class={`h-full rounded-full ${metric.color}/80 bar-fill`}
+                    style={`width: ${metric.percent}; --bar-delay: ${400 + i * 140}ms`}
                   ></div>
                 </div>
               </div>
@@ -205,8 +205,11 @@ const marquee = [
     <InstallTabs />
   </div>
 
-  <div class="relative mt-16 overflow-hidden border-y border-line py-5">
-    <div class="marquee-track flex w-max gap-10 whitespace-nowrap" aria-label="已集成的开源组件">
+  <div class="group relative mt-16 overflow-hidden border-y border-line py-5">
+    <div
+      class="marquee-track group-hover:[animation-play-state:paused] flex w-max gap-10 whitespace-nowrap"
+      aria-label="已集成的开源组件"
+    >
       {
         [...marquee, ...marquee].map((name, i) => (
           <span

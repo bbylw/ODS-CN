@@ -41,7 +41,7 @@ const tables = [
   <div class="mx-auto max-w-350 px-5 py-24 sm:px-8 lg:py-32">
     <div class="grid grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
       <div class="lg:sticky lg:top-28 lg:self-start">
-        <p class="reveal eyebrow">Hardware</p>
+        <p class="reveal eyebrow"><span class="text-faint">05 · </span>Hardware</p>
         <h2
           class="reveal mt-5 font-display text-[clamp(2rem,4vw,3.1rem)] font-bold leading-[1.15] tracking-tight"
         >
@@ -89,7 +89,7 @@ const tables = [
       <div class="space-y-12">
         {
           tables.map((t, i) => (
-            <div class="reveal panel noise p-5 sm:p-6 transition-all duration-200 hover:border-line/90" style={`--reveal-delay: ${i * 80}ms`}>
+            <div class="reveal panel noise p-5 sm:p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-amber/30" style={`--reveal-delay: ${i * 80}ms`}>
               <div class="flex items-center justify-between border-b border-line pb-3.5">
                 <h3 class="font-display text-lg font-bold tracking-tight text-ink">{t.platform}</h3>
                 <span class="rounded-full bg-base-950/80 px-2.5 py-0.5 font-mono text-[10px] text-faint border border-line">

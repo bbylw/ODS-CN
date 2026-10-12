@@ -56,7 +56,7 @@ const groups = [
 <section id="stack" class="relative border-b border-line">
   <div class="mx-auto max-w-350 px-5 py-24 sm:px-8 lg:py-32">
     <div class="max-w-3xl">
-      <p class="reveal eyebrow">The stack</p>
+      <p class="reveal eyebrow"><span class="text-faint">03 · </span>The stack</p>
       <h2
         class="reveal mt-5 font-display text-[clamp(2rem,4.2vw,3.4rem)] font-bold leading-[1.15] tracking-tight"
       >
@@ -70,7 +70,7 @@ const groups = [
     <div class="mt-14 grid grid-cols-1 gap-x-14 gap-y-12 lg:grid-cols-2">
       {
         groups.map((group, gi) => (
-          <div class="reveal panel noise p-6 sm:p-7 transition-all duration-200 hover:border-line/90" style={`--reveal-delay: ${(gi % 2) * 90}ms`}>
+          <div class="reveal panel noise p-6 sm:p-7 transition-all duration-300 hover:-translate-y-0.5 hover:border-amber/30" style={`--reveal-delay: ${(gi % 2) * 90}ms`}>
             <div class="flex items-center justify-between border-b border-line pb-4">
               <h3 class="font-display text-lg font-bold tracking-tight text-amber">
                 {group.title}

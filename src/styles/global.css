@@ -15,7 +15,7 @@
   --color-line: #2c3128;
   --color-ink: #f1f0e7;
   --color-muted: #a2a898;
-  --color-faint: #767d6e;
+  --color-faint: #858c7a;
   --color-amber: #e0a24a;
   --color-amber-dim: #b8823c;
   --color-moss: #93b076;
@@ -82,6 +82,16 @@
     outline-offset: 3px;
     border-radius: 4px;
   }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
 }
 
 @layer utilities {
@@ -146,7 +156,10 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  .panel {
+  /* :where 归零特异性，确保 Tailwind 工具类（rounded/shadow/transition）可正常覆盖 */
+  :where(.panel) {
+    position: relative;
+    isolation: isolate;
     background: linear-gradient(
       165deg,
       color-mix(in srgb, var(--color-base-800) 90%, transparent),
@@ -157,6 +170,130 @@
     box-shadow:
       inset 0 1px 0 0 color-mix(in srgb, var(--color-ink) 5%, transparent),
       0 12px 36px -12px rgba(0, 0, 0, 0.45);
+    transition:
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  /* 聚光灯：指针跟随的暖色辉光，负 z-index 保证位于内容之下 */
+  .panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    background: radial-gradient(
+      18rem 18rem at var(--mx, 50%) var(--my, 50%),
+      color-mix(in srgb, var(--color-amber) 10%, transparent),
+      transparent 65%
+    );
+  }
+
+  .panel:hover::before {
+    opacity: 1;
+  }
+
+  .panel:hover {
+    border-color: color-mix(in srgb, var(--color-amber) 32%, var(--color-line));
+  }
+
+  /* 分区渐变细线 */
+  section[class~="border-b"] {
+    border-image: linear-gradient(
+        to right,
+        transparent,
+        var(--color-line) 14%,
+        var(--color-line) 86%,
+        transparent
+      )
+      1;
+  }
+
+  /* 终端扫描线（CRT 质感） */
+  .scanlines::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0 3px,
+      color-mix(in srgb, var(--color-ink) 2.5%, transparent) 3px 4px
+    );
+  }
+
+  /* 指标条入场生长 */
+  .bar-fill {
+    transform-origin: left center;
+    animation: bar-grow 1.1s var(--ease-out-expo) both;
+    animation-delay: var(--bar-delay, 0ms);
+  }
+
+  @keyframes bar-grow {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  /* 主按钮高光扫过 */
+  .btn-sheen {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-sheen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      105deg,
+      transparent 38%,
+      rgba(255, 255, 255, 0.28) 50%,
+      transparent 62%
+    );
+    transform: translateX(-130%);
+    transition: transform 0.75s var(--ease-out-expo);
+  }
+
+  .btn-sheen:hover::after {
+    transform: translateX(130%);
+  }
+
+  /* 导航当前区块 */
+  .nav-link {
+    position: relative;
+  }
+
+  .nav-link[aria-current="true"] {
+    color: var(--color-amber);
+  }
+
+  .nav-link[aria-current="true"]::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 3px;
+    height: 3px;
+    border-radius: 9999px;
+    background: var(--color-amber);
+    transform: translateX(-50%);
+  }
+
+  /* 阅读进度 */
+  .scroll-progress {
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    will-change: transform;
   }
 
   .glass {
@@ -276,6 +413,14 @@
   .breathe,
   .animate-live-ping {
     animation: none;
+  }
+
+  .bar-fill {
+    animation: none;
+  }
+
+  .btn-sheen::after {
+    display: none;
   }
 
   .btn-tactile:hover,

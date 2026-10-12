@@ -96,5 +96,37 @@ const ogImageURL = Astro.site
         targets.forEach((el) => io.observe(el));
       }
     </script>
+
+    <script>
+      // 面板聚光灯：指针位置写入 CSS 变量（仅精确指针设备，rAF 节流）
+      const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+      if (finePointer && !document.documentElement.dataset.spotlightReady) {
+        document.documentElement.dataset.spotlightReady = "true";
+        let frame = 0;
+        let panel: HTMLElement | null = null;
+        let px = 0;
+        let py = 0;
+        document.addEventListener(
+          "pointermove",
+          (e) => {
+            const target = e.target as HTMLElement | null;
+            const next = target?.closest?.(".panel") as HTMLElement | null;
+            if (next !== panel) panel = next;
+            if (!panel) return;
+            px = e.clientX;
+            py = e.clientY;
+            if (frame) return;
+            frame = requestAnimationFrame(() => {
+              frame = 0;
+              if (!panel) return;
+              const rect = panel.getBoundingClientRect();
+              panel.style.setProperty("--mx", `${px - rect.left}px`);
+              panel.style.setProperty("--my", `${py - rect.top}px`);
+            });
+          },
+          { passive: true }
+        );
+      }
+    </script>
   </body>
 </html>

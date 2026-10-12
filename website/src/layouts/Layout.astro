@@ -16,7 +16,9 @@ const {
 const canonicalURL = Astro.site
   ? new URL(Astro.url.pathname, Astro.site).toString()
   : undefined;
-// NOTE: og:image 需要 1200x630 PNG（爬虫不支持 SVG），备好 public/og.png 后再加回。
+const ogImageURL = Astro.site
+  ? new URL("/og.png", Astro.site).toString()
+  : undefined;
 ---
 
 <!doctype html>
@@ -30,14 +32,22 @@ const canonicalURL = Astro.site
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh_CN" />
-    <meta name="twitter:card" content="summary" />
+    {ogImageURL && <meta property="og:image" content={ogImageURL} />}
+    {ogImageURL && <meta property="og:image:type" content="image/png" />}
+    {ogImageURL && <meta property="og:image:width" content="1200" />}
+    {ogImageURL && <meta property="og:image:height" content="630" />}
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    {ogImageURL && <meta name="twitter:image" content={ogImageURL} />}
     {canonicalURL && <link rel="canonical" href={canonicalURL} />}
     <meta name="theme-color" content="#0c0e0a" />
-    <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
-    <link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon-16.png" type="image/png" sizes="16x16" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="manifest" href="/site.webmanifest" />
     <title>{title}</title>
     <script
       type="application/ld+json"

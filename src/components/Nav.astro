@@ -124,6 +124,11 @@ const LINKS = [
 <script>
   function setupNav() {
     const header = document.getElementById("site-nav");
+    if (!header) return;
+    // 防止立即执行与 astro:page-load 重复绑定事件监听
+    if (header.dataset.navReady === "true") return;
+    header.dataset.navReady = "true";
+
     const menuBtn = document.getElementById("mobile-menu-btn");
     const mobileMenu = document.getElementById("mobile-menu");
     const line1 = document.getElementById("hamburger-line-1");

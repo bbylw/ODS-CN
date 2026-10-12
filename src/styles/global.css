@@ -307,7 +307,9 @@
     font-variant-numeric: tabular-nums;
   }
 
-  .btn-tactile {
+  /* :where 归零特异性，确保响应式工具类（flex/hidden/lg:hidden）可正常覆盖 display，
+     避免 .btn-tactile 的 display:inline-flex 在大屏压过 lg:hidden 导致汉堡按钮常显 */
+  :where(.btn-tactile) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -319,11 +321,11 @@
     will-change: transform;
   }
 
-  .btn-tactile:hover {
+  :where(.btn-tactile):hover {
     transform: translateY(-1px);
   }
 
-  .btn-tactile:active {
+  :where(.btn-tactile):active {
     transform: scale(0.97) translateY(0);
   }
 

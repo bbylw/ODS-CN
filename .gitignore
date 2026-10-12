@@ -26,3 +26,6 @@ pnpm-debug.log*
 # agent workspace data
 .workbuddy/
 website/
+
+# playwright-cli artifacts (screenshots/snapshots)
+.playwright-cli/

@@ -8,7 +8,7 @@ import tailwindcss from '@tailwindcss/vite';
 // 部署域名变更时同步修改 site（用于 sitemap / canonical / OG）
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://osmantic.com',
+  site: 'https://ods.ndjp.net',
   integrations: [react(), sitemap()],
 
   vite: {

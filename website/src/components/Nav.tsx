@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
 const LINKS = [
-  { href: "#why", label: "为什么" },
-  { href: "#features", label: "能力" },
-  { href: "#stack", label: "组件" },
-  { href: "#quickstart", label: "快速开始" },
-  { href: "#hardware", label: "硬件" },
-  { href: "#extend", label: "扩展" },
-  { href: "#docs", label: "文档" },
+  { href: "/#why", label: "为什么" },
+  { href: "/#features", label: "能力" },
+  { href: "/#stack", label: "组件" },
+  { href: "/#quickstart", label: "快速开始" },
+  { href: "/#hardware", label: "硬件" },
+  { href: "/#extend", label: "扩展" },
+  { href: "/#docs", label: "文档" },
 ];
 
 export default function Nav() {
@@ -45,8 +45,11 @@ export default function Nav() {
           : "border-b border-transparent"
       }`}
     >
-      <nav className="mx-auto flex h-16 max-w-[1400px] items-center gap-6 px-5 sm:px-8">
-        <a href="#top" className="group flex items-baseline gap-2.5">
+      <nav
+        aria-label="主导航"
+        className="mx-auto flex h-16 max-w-[1400px] items-center gap-6 px-5 sm:px-8"
+      >
+        <a href="/" className="group flex items-baseline gap-2.5">
           <span className="font-display text-xl font-bold tracking-tight">
             ODS
           </span>
@@ -108,7 +111,7 @@ export default function Nav() {
       {open && (
         <div
           id="mobile-menu"
-          className="border-t border-line bg-base-950/95 px-5 pb-8 pt-4 lg:hidden"
+          className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-line bg-base-950/95 px-5 pb-8 pt-4 lg:hidden"
         >
           <ul className="flex flex-col divide-y divide-line">
             {LINKS.map((link) => (

@@ -67,26 +67,26 @@ const groups = [
       </p>
     </div>
 
-    <div class="mt-14 grid grid-cols-1 gap-x-16 gap-y-14 lg:grid-cols-2">
+    <div class="mt-14 grid grid-cols-1 gap-x-14 gap-y-12 lg:grid-cols-2">
       {
         groups.map((group, gi) => (
-          <div class="reveal" style={`--reveal-delay: ${(gi % 2) * 90}ms`}>
-            <div class="flex items-center gap-4">
+          <div class="reveal panel noise p-6 sm:p-7 transition-all duration-200 hover:border-line/90" style={`--reveal-delay: ${(gi % 2) * 90}ms`}>
+            <div class="flex items-center justify-between border-b border-line pb-4">
               <h3 class="font-display text-lg font-bold tracking-tight text-amber">
                 {group.title}
               </h3>
-              <span class="h-px flex-1 bg-line" />
-              <span class="font-mono text-[11px] text-faint">
-                {String(group.items.length).padStart(2, "0")}
+              <span class="rounded-full border border-line bg-base-950/80 px-2.5 py-0.5 font-mono text-[11px] font-medium text-faint">
+                {group.items.length} 个组件
               </span>
             </div>
-            <dl class="mt-2 divide-y divide-line border-b border-line">
+            <dl class="mt-3 divide-y divide-line/60">
               {group.items.map(([name, desc]) => (
-                <div class="group grid grid-cols-1 gap-1 py-5 transition-colors duration-200 hover:bg-base-800/40 sm:grid-cols-[11.5rem_1fr] sm:gap-6">
-                  <dt class="font-mono text-[13px] text-ink transition-colors duration-200 group-hover:text-amber">
-                    {name}
+                <div class="group grid grid-cols-1 gap-1.5 py-3.5 transition-colors duration-150 sm:grid-cols-[10.5rem_1fr] sm:gap-4 hover:bg-base-950/40 rounded-lg px-2 -mx-2">
+                  <dt class="flex items-center gap-2 font-mono text-[13px] font-medium text-ink transition-colors duration-150 group-hover:text-amber">
+                    <span class="h-1 w-1 rounded-full bg-amber/50 group-hover:bg-amber" />
+                    <span>{name}</span>
                   </dt>
-                  <dd class="text-[14px] leading-[1.85] text-muted">{desc}</dd>
+                  <dd class="text-[13.5px] leading-[1.8] text-muted">{desc}</dd>
                 </div>
               ))}
             </dl>

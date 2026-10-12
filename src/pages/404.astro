@@ -3,30 +3,40 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="页面未找到 · ODS">
-  <section class="mx-auto max-w-350 px-5 py-40 text-center sm:px-8">
-    <p class="eyebrow reveal">404</p>
+  <section class="atmosphere noise relative mx-auto max-w-350 px-5 py-40 text-center sm:px-8">
+    <div class="reveal mx-auto mb-4 inline-flex items-center gap-2 rounded-full border border-amber/30 bg-amber/10 px-4 py-1.5 font-mono text-xs text-amber shadow-inner">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-live-ping absolute inline-flex h-full w-full rounded-full bg-amber opacity-75"></span>
+        <span class="relative inline-flex h-2 w-2 rounded-full bg-amber"></span>
+      </span>
+      <span>404 NOT FOUND</span>
+    </div>
     <h1
-      class="mx-auto mt-5 max-w-[20ch] font-display text-[clamp(2rem,4.2vw,3.4rem)] font-bold leading-[1.15] tracking-tight"
+      class="reveal mx-auto mt-5 max-w-[20ch] font-display text-[clamp(2.2rem,4.5vw,3.6rem)] font-bold leading-[1.12] tracking-tight"
     >
-      这个页面不在你的本地服务器上
+      这个页面不在你的<span class="text-amber">本地服务器</span>上
     </h1>
-    <p class="mx-auto mt-6 max-w-[52ch] text-[15px] leading-[1.95] text-muted">
-      你访问的地址不存在或已被移动。回到首页获取 ODS 安装命令与文档。
+    <p class="reveal mx-auto mt-6 max-w-[52ch] text-[15px] leading-[1.95] text-muted">
+      你访问的地址不存在或已被移动。所有服务、安装指南与文档均可在首页一览无余。
     </p>
-    <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+    <div class="reveal mt-9 flex flex-wrap items-center justify-center gap-3.5">
       <a
         href="/"
-        class="inline-flex items-center gap-2 rounded-full bg-amber px-6 py-3.5 text-[15px] font-semibold text-base-950 transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
+        class="btn-tactile gap-2 rounded-full bg-amber px-6 py-3.5 text-[15px] font-semibold text-base-950 shadow-[0_12px_32px_-8px_rgba(224,162,74,0.45)] hover:shadow-[0_18px_44px_-10px_rgba(224,162,74,0.55)]"
       >
-        回到首页
+        <span>回到首页</span>
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14"></path>
+          <path d="m12 5 7 7-7 7"></path>
+        </svg>
       </a>
       <a
         href="https://github.com/Osmantic/ODS"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 rounded-full border border-line px-6 py-3.5 text-[15px] text-ink transition-all duration-200 hover:-translate-y-0.5 hover:border-amber/50 hover:text-amber active:scale-[0.98]"
+        class="btn-tactile gap-2 rounded-full border border-line bg-base-900/60 px-5 py-3.5 text-[15px] text-ink hover:border-amber/50 hover:text-amber"
       >
-        GitHub 仓库
+        <span>GitHub 仓库</span>
       </a>
     </div>
   </section>

@@ -26,22 +26,28 @@ const compare = [
           <span class="text-amber">一致的安装体验</span>
         </h2>
 
-        <dl class="reveal mt-8 divide-y divide-line border-y border-line">
+        <dl class="reveal mt-8 space-y-3">
           {
             support.map(([platform, status, note]) => (
-              <div class="grid grid-cols-1 gap-2 py-5 sm:grid-cols-[1fr_auto] sm:items-center sm:gap-6">
+              <div class="panel noise p-4.5 transition-all duration-200 hover:border-line/90 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div>
                   <dt class="text-[15px] font-semibold text-ink">{platform}</dt>
                   <dd class="mt-1 text-[13px] text-faint">{note}</dd>
                 </div>
                 <span
-                  class={`justify-self-start rounded-full border px-3 py-1.5 font-mono text-[11px] tracking-wide sm:justify-self-end ${
+                  class={`inline-flex items-center gap-1.5 self-start sm:self-auto rounded-full border px-3 py-1 font-mono text-[11px] font-medium tracking-wide ${
                     status.startsWith("已支持")
                       ? "border-moss/40 bg-moss/10 text-moss"
                       : "border-amber/40 bg-amber/10 text-amber"
                   }`}
                 >
-                  {status}
+                  {status.startsWith("已支持") && (
+                    <span class="relative flex h-1.5 w-1.5">
+                      <span class="animate-live-ping absolute inline-flex h-full w-full rounded-full bg-moss opacity-75"></span>
+                      <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-moss"></span>
+                    </span>
+                  )}
+                  <span>{status}</span>
                 </span>
               </div>
             ))
@@ -50,12 +56,12 @@ const compare = [
 
         <div class="reveal mt-8 space-y-4 text-[14px] leading-[1.95] text-muted">
           <p>
-            <span class="text-ink">Linux 发行版：</span>CI 在 Ubuntu 26.04/24.04/22.04、Debian 12、Linux
+            <span class="text-ink font-medium">Linux 发行版：</span>CI 在 Ubuntu 26.04/24.04/22.04、Debian 12、Linux
             Mint 21.3、Fedora 41、Rocky Linux 9、Arch Linux、Manjaro、CachyOS 与 openSUSE
             Tumbleweed 上冒烟测试包管理器检测与安装器前置条件。若你的发行版无法工作，请提交 issue。
           </p>
           <p>
-            <span class="text-ink">发布验证：</span>涉及运行的变更会经过一道发布级别的闸口，覆盖零前置条件的引导、干净安装、产品行为、完整模型能力、生命周期恢复以及用户级验收。
+            <span class="text-ink font-medium">发布验证：</span>涉及运行的变更会经过一道发布级别的闸口，覆盖零前置条件的引导、干净安装、产品行为、完整模型能力、生命周期恢复以及用户级验收。
           </p>
         </div>
       </div>
@@ -74,10 +80,18 @@ const compare = [
         <div class="reveal mt-8 space-y-4">
           {
             compare.map(([tool, gives, extra]) => (
-              <article class="panel p-6 transition-colors duration-300 hover:border-amber/35">
-                <p class="font-mono text-[12px] tracking-wide text-amber">{tool}</p>
-                <p class="mt-3 text-[13px] leading-[1.85] text-faint">它给你：{gives}</p>
-                <p class="mt-2 text-[14px] leading-[1.9] text-ink">ODS 额外提供：{extra}</p>
+              <article class="panel noise p-6 transition-all duration-300 hover:border-amber/40 hover:-translate-y-0.5 shadow-sm">
+                <div class="flex items-center justify-between">
+                  <p class="font-mono text-[13px] font-semibold tracking-wide text-amber">{tool}</p>
+                  <span class="text-[10px] font-mono text-faint border border-line rounded px-1.5 py-0.5">对比</span>
+                </div>
+                <p class="mt-2 text-[13px] leading-relaxed text-muted">
+                  <span class="text-faint">它给你：</span>{gives}
+                </p>
+                <div class="mt-3 rounded-xl border border-line/70 bg-base-950/70 p-3 text-[13.5px] leading-relaxed text-ink shadow-inner">
+                  <span class="font-mono text-[11px] text-amber font-semibold">ODS 额外提供：</span>
+                  <span class="mt-0.5 block">{extra}</span>
+                </div>
               </article>
             ))
           }

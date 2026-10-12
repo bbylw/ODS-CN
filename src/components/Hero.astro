@@ -35,8 +35,12 @@ const marquee = [
     <div>
       <div class="reveal flex flex-wrap items-center gap-3">
         <span
-          class="rounded-full border border-amber/40 bg-amber/10 px-3 py-1.5 font-mono text-[11px] tracking-[0.18em] text-amber"
+          class="inline-flex items-center gap-2 rounded-full border border-amber/40 bg-amber/10 px-3.5 py-1.5 font-mono text-[11px] tracking-[0.16em] text-amber shadow-[inset_0_1px_0_rgba(224,162,74,0.25)]"
         >
+          <span class="relative flex h-2 w-2">
+            <span class="animate-live-ping absolute inline-flex h-full w-full rounded-full bg-amber opacity-75"></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-amber"></span>
+          </span>
           ODS V3 · 预发布
         </span>
         <span class="flex items-center gap-2 font-mono text-[11px] tracking-[0.14em] text-faint">
@@ -62,21 +66,42 @@ const marquee = [
         你不必再手动拼装 Ollama、Open WebUI、n8n、ComfyUI 以及各种隐私工具。
       </p>
 
-      <div class="reveal mt-9 flex flex-wrap items-center gap-3" style="--reveal-delay: 260ms">
+      <div class="reveal mt-9 flex flex-wrap items-center gap-3.5" style="--reveal-delay: 260ms">
         <a
           href="/#quickstart"
-          class="group inline-flex items-center gap-2 rounded-full bg-amber px-6 py-3.5 text-[15px] font-semibold text-base-950 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_-12px_rgba(224,162,74,0.45)] active:scale-[0.98]"
+          class="btn-tactile group gap-2.5 rounded-full bg-amber px-6 py-3.5 text-[15px] font-semibold text-base-950 shadow-[0_12px_32px_-8px_rgba(224,162,74,0.45)] hover:shadow-[0_18px_44px_-10px_rgba(224,162,74,0.55)]"
         >
-          一条命令开始安装
+          <span>一条命令开始安装</span>
+          <svg
+            class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
         </a>
         <a
           href="https://youtu.be/nO8xFNHX-HA"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 rounded-full border border-line px-6 py-3.5 text-[15px] text-ink transition-all duration-200 hover:-translate-y-0.5 hover:border-amber/50 hover:text-amber active:scale-[0.98]"
+          class="btn-tactile group gap-2.5 rounded-full border border-line bg-base-900/60 px-5 py-3.5 text-[15px] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] hover:border-amber/50 hover:text-amber"
         >
-          观看演示
-          <span class="font-mono text-xs text-faint">YouTube</span>
+          <svg
+            class="h-4 w-4 text-faint transition-colors duration-200 group-hover:text-amber"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+          <span>观看演示</span>
+          <span class="rounded-full bg-base-800 px-2 py-0.5 font-mono text-[11px] text-faint group-hover:text-amber/80">YouTube</span>
         </a>
       </div>
 
@@ -91,8 +116,8 @@ const marquee = [
             ["0", "遥测数据收集"],
             ["Apache", "2.0 开源许可"],
           ].map(([value, label]) => (
-            <div class="bg-base-900 px-4 py-4">
-              <dt class="font-display text-xl font-bold tracking-tight text-ink">{value}</dt>
+            <div class="bg-base-900 px-4 py-4 transition-colors duration-200 hover:bg-base-800/80">
+              <dt class="tabular font-display text-xl font-bold tracking-tight text-ink">{value}</dt>
               <dd class="mt-1 text-xs text-faint">{label}</dd>
             </div>
           ))
@@ -104,10 +129,22 @@ const marquee = [
       <div
         class="panel noise relative overflow-hidden rounded-[1.75rem] shadow-[0_40px_120px_-40px_rgba(0,0,0,0.9)]"
       >
-        <div class="flex items-center justify-between border-b border-line px-5 py-3.5">
-          <div class="flex items-center gap-2">
-            <span class="h-2 w-2 rounded-full bg-moss/80"></span>
-            <span class="font-mono text-[11px] tracking-[0.18em] text-muted">控制台 · 实时</span>
+        <!-- 控制台窗口标题栏 -->
+        <div class="flex items-center justify-between border-b border-line bg-base-950/70 px-5 py-3.5">
+          <div class="flex items-center gap-2.5">
+            <div class="flex items-center gap-1.5" aria-hidden="true">
+              <span class="h-2.5 w-2.5 rounded-full bg-[#ef4444]/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-[#eab308]/80"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-[#22c55e]/80"></span>
+            </div>
+            <span class="h-3.5 w-px bg-line" aria-hidden="true"></span>
+            <div class="flex items-center gap-2">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-live-ping absolute inline-flex h-full w-full rounded-full bg-moss opacity-75"></span>
+                <span class="relative inline-flex h-2 w-2 rounded-full bg-moss"></span>
+              </span>
+              <span class="font-mono text-[11px] tracking-[0.16em] text-muted">控制台 · 实时状态</span>
+            </div>
           </div>
           <span class="font-mono text-[11px] text-faint">localhost:3001</span>
         </div>
@@ -116,15 +153,18 @@ const marquee = [
           {
             services.map((s, i) => (
               <div
-                class="flex items-center justify-between rounded-xl border border-line/70 bg-base-950/50 px-4 py-3 transition-colors duration-200 hover:border-amber/30"
+                class="group flex items-center justify-between rounded-xl border border-line/70 bg-base-950/60 px-4 py-3 transition-all duration-200 hover:border-amber/40 hover:bg-base-900/60"
                 style={`transition-delay: ${i * 40}ms`}
               >
                 <div>
-                  <p class="font-mono text-[13px] text-ink">{s.name}</p>
+                  <p class="font-mono text-[13px] text-ink transition-colors group-hover:text-amber">{s.name}</p>
                   <p class="mt-0.5 text-[11px] text-faint">{s.detail}</p>
                 </div>
-                <span class="flex items-center gap-1.5 font-mono text-[11px] text-moss">
-                  <span class="h-1.5 w-1.5 rounded-full bg-moss/80" />
+                <span class="flex items-center gap-2 font-mono text-[11px] text-moss">
+                  <span class="relative flex h-1.5 w-1.5">
+                    <span class="animate-live-ping absolute inline-flex h-full w-full rounded-full bg-moss opacity-75"></span>
+                    <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-moss"></span>
+                  </span>
                   {s.state}
                 </span>
               </div>
@@ -132,16 +172,23 @@ const marquee = [
           }
         </div>
 
+        <!-- 硬件实时指标与进度条 -->
         <div class="grid grid-cols-3 gap-px border-t border-line bg-line">
           {
             [
-              ["GPU", "74%"],
-              ["显存", "21.4 GB"],
-              ["上下文", "64K"],
-            ].map(([label, value]) => (
+              { label: "GPU 负载", value: "74%", percent: "74%", color: "bg-amber" },
+              { label: "显存占用", value: "21.4 GB", percent: "89%", color: "bg-moss" },
+              { label: "上下文", value: "64K", percent: "50%", color: "bg-amber" },
+            ].map((metric) => (
               <div class="bg-base-900 px-4 py-3.5">
-                <p class="font-mono text-[10px] tracking-[0.16em] text-faint">{label}</p>
-                <p class="mt-1 font-display text-lg font-bold text-ink">{value}</p>
+                <p class="font-mono text-[10px] tracking-[0.16em] text-faint">{metric.label}</p>
+                <p class="tabular mt-1 font-display text-lg font-bold text-ink">{metric.value}</p>
+                <div class="mt-2 h-1 w-full overflow-hidden rounded-full bg-base-950" aria-hidden="true">
+                  <div
+                    class={`h-full rounded-full ${metric.color}/80`}
+                    style={`width: ${metric.percent}`}
+                  ></div>
+                </div>
               </div>
             ))
           }

@@ -6,6 +6,7 @@ const features = [
     tag: "llama-server",
     desc: "在你自己的硬件上运行开源模型。高性能推理支持连续批处理，安装器会为你的 GPU 自动选择模型与后端。",
     visual: "code",
+    icon: "cpu",
   },
   {
     span: "md:col-span-3",
@@ -13,36 +14,42 @@ const features = [
     tag: "localhost:3001",
     desc: "从一处集中管理模型、服务、安装、GPU 状态与扩展：实时 GPU 指标、服务健康度、模型下载与切换。",
     visual: "status",
+    icon: "monitor",
   },
   {
     span: "md:col-span-2",
     title: "ChatGPT 风格的 Web 界面",
     tag: "Open WebUI",
     desc: "在任意浏览器中与你的模型对话：对话历史、Web 搜索、文档上传，支持 30+ 种语言。",
+    icon: "chat",
   },
   {
     span: "md:col-span-2",
     title: "语音、智能体与工作流",
     tag: "Whisper · Kokoro · n8n",
     desc: "构建能够听、说、调用工具并真正完成工作的自动化：语音转文本、文本转语音，以及 400+ 集成的工作流引擎。",
+    icon: "workflow",
   },
   {
     span: "md:col-span-2",
     title: "RAG 与搜索",
     tag: "Qdrant · SearXNG",
     desc: "连接本地文档、私有搜索与检索工作流：向量数据库、无追踪的自托管搜索、深度研究引擎。",
+    icon: "search",
   },
   {
     span: "md:col-span-3",
     title: "图像生成",
     tag: "ComfyUI",
     desc: "运行本地图像工具，而不把提示词发往任何托管 API。基于节点的工作流，全部留在你的机器上。",
+    icon: "palette",
   },
   {
     span: "md:col-span-3",
     title: "隐私与运维",
     tag: "Privacy Shield · Token Spy",
     desc: "将服务鉴权、密钥、可观测性与诊断集中在一个本地技术栈中，包括 PII 擦除代理与令牌用量监视。",
+    icon: "shield",
   },
 ];
 ---
@@ -68,41 +75,110 @@ const features = [
       {
         features.map((f, i) => (
           <article
-            class={`reveal panel noise group relative flex flex-col overflow-hidden p-7 transition-all duration-300 hover:-translate-y-1 hover:border-amber/35 ${f.span}`}
+            class={`reveal panel noise group relative flex flex-col justify-between overflow-hidden p-7 transition-all duration-300 hover:-translate-y-1 hover:border-amber/40 hover:shadow-[0_16px_40px_-16px_rgba(224,162,74,0.15)] ${f.span}`}
             style={`--reveal-delay: ${i * 70}ms`}
           >
-            <div class="flex items-center justify-between gap-4">
-              <h3 class="font-display text-[21px] font-bold leading-snug tracking-tight text-ink">
-                {f.title}
-              </h3>
-              <span class="shrink-0 rounded-full border border-line px-2.5 py-1 font-mono text-[10px] tracking-wide text-faint transition-colors duration-300 group-hover:border-amber/40 group-hover:text-amber">
-                {f.tag}
-              </span>
+            <div>
+              <div class="flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                  <div class="flex h-9 w-9 items-center justify-center rounded-xl border border-line bg-base-950/80 text-amber shadow-inner">
+                    {f.icon === "cpu" && (
+                      <svg class="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                        <rect x="9" y="9" width="6" height="6"></rect>
+                        <path d="M15 2v2M9 2v2M15 20v2M9 20v2M2 15h2M2 9h2M20 15h2M20 9h2"></path>
+                      </svg>
+                    )}
+                    {f.icon === "monitor" && (
+                      <svg class="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                      </svg>
+                    )}
+                    {f.icon === "chat" && (
+                      <svg class="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                      </svg>
+                    )}
+                    {f.icon === "workflow" && (
+                      <svg class="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                      </svg>
+                    )}
+                    {f.icon === "search" && (
+                      <svg class="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                      </svg>
+                    )}
+                    {f.icon === "palette" && (
+                      <svg class="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
+                        <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
+                        <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
+                        <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
+                        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path>
+                      </svg>
+                    )}
+                    {f.icon === "shield" && (
+                      <svg class="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                      </svg>
+                    )}
+                  </div>
+                  <h3 class="font-display text-[20px] font-bold leading-snug tracking-tight text-ink">
+                    {f.title}
+                  </h3>
+                </div>
+                <span class="shrink-0 rounded-full border border-line bg-base-950/50 px-2.5 py-1 font-mono text-[10px] tracking-wide text-faint transition-colors duration-300 group-hover:border-amber/40 group-hover:text-amber">
+                  {f.tag}
+                </span>
+              </div>
+              <p class="mt-4 max-w-[46ch] text-[14.5px] leading-[1.85] text-muted">{f.desc}</p>
             </div>
-            <p class="mt-3.5 max-w-[46ch] text-[14.5px] leading-[1.9] text-muted">{f.desc}</p>
 
             {f.visual === "code" && (
-              <div class="mt-6 rounded-xl border border-line bg-base-950/70 p-4 font-mono text-[11.5px] leading-[1.9] text-faint">
-                <p>
-                  <span class="text-amber">$</span> ods status
-                </p>
-                <p>
-                  <span class="text-moss">✓</span> llm llama-server 已就绪 · 64K ctx
-                </p>
-                <p>
-                  <span class="text-moss">✓</span> GPU 已检测 · CUDA / Metal / Vulkan
-                </p>
+              <div class="mt-6 overflow-hidden rounded-xl border border-line bg-base-950/80 font-mono text-[11.5px] leading-[1.9] text-faint shadow-inner">
+                <div class="flex items-center gap-1.5 border-b border-line/60 bg-base-900/60 px-3.5 py-2">
+                  <span class="h-2 w-2 rounded-full bg-[#ef4444]/60"></span>
+                  <span class="h-2 w-2 rounded-full bg-[#eab308]/60"></span>
+                  <span class="h-2 w-2 rounded-full bg-[#22c55e]/60"></span>
+                  <span class="ml-2 font-mono text-[10px] text-faint">bash</span>
+                </div>
+                <div class="p-3.5 space-y-1">
+                  <p>
+                    <span class="text-amber font-bold">$ </span>ods status
+                  </p>
+                  <p class="text-ink/80">
+                    <span class="text-moss font-bold">✓</span> llm llama-server 已就绪 · 64K ctx
+                  </p>
+                  <p class="text-ink/80">
+                    <span class="text-moss font-bold">✓</span> GPU 已检测 · CUDA / Metal / Vulkan
+                  </p>
+                </div>
               </div>
             )}
             {f.visual === "status" && (
               <div class="mt-6 space-y-2">
-                {["模型管理", "服务健康度", "扩展目录"].map((row) => (
-                  <div class="flex items-center justify-between rounded-lg border border-line/70 bg-base-950/50 px-3.5 py-2.5">
-                    <span class="font-mono text-[11.5px] text-muted">{row}</span>
-                    <span class="flex items-center gap-1.5 font-mono text-[10px] text-moss">
-                      <span class="h-1.5 w-1.5 rounded-full bg-moss/80" />
-                      LIVE
-                    </span>
+                {[
+                  { name: "模型管理", status: "已加载", port: ":8080" },
+                  { name: "服务健康度", status: "运行中", port: ":3001" },
+                  { name: "扩展目录", status: "14 个已启用", port: "Core" },
+                ].map((row) => (
+                  <div class="flex items-center justify-between rounded-lg border border-line/70 bg-base-950/60 px-3.5 py-2.5 transition-colors group-hover:border-line">
+                    <span class="font-mono text-[12px] text-ink/90">{row.name}</span>
+                    <div class="flex items-center gap-3">
+                      <span class="font-mono text-[10.5px] text-faint">{row.port}</span>
+                      <span class="flex items-center gap-1.5 font-mono text-[10.5px] text-moss">
+                        <span class="relative flex h-1.5 w-1.5">
+                          <span class="animate-live-ping absolute inline-flex h-full w-full rounded-full bg-moss opacity-75"></span>
+                          <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-moss"></span>
+                        </span>
+                        {row.status}
+                      </span>
+                    </div>
                   </div>
                 ))}
               </div>

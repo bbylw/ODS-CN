@@ -47,10 +47,24 @@ const points = [
         </div>
 
         <div
-          class="reveal mt-10 rounded-2xl border border-amber/25 bg-amber/6 p-6 text-[14px] leading-[1.95] text-muted"
+          class="reveal mt-10 rounded-2xl border border-amber/30 bg-amber/8 p-6 text-[14px] leading-[1.95] text-muted shadow-[inset_0_1px_0_rgba(224,162,74,0.15)]"
         >
-          <p class="font-semibold text-amber">隐私默认成立</p>
-          <p class="mt-2">
+          <div class="flex items-center gap-2.5 font-semibold text-amber">
+            <svg
+              class="h-4 w-4 shrink-0 text-amber"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span>隐私默认成立</span>
+          </div>
+          <p class="mt-2.5">
             推理过程、聊天记录与你的文件都留在你自己的机器上，ODS 不收集任何遥测数据。
             默认情况下，它只在以下情况联网：下载模型与容器镜像、到 GitHub 检查 ODS 更新，
             以及运行 Portal 智能体为你发起的网络搜索。云端与混合 API 模式是可选的。
@@ -58,18 +72,18 @@ const points = [
         </div>
       </div>
 
-      <ol class="reveal divide-y divide-line border-y border-line">
+      <ol class="reveal space-y-4">
         {
           points.map((point, i) => (
-            <li class="group grid grid-cols-[3.25rem_1fr] gap-5 py-8 transition-colors duration-300 hover:bg-base-800/40">
-              <span class="pt-1 font-mono text-xs tracking-[0.18em] text-amber/80">
+            <li class="panel noise group relative flex items-start gap-5 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-amber/40 hover:bg-base-800/80">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-line bg-base-950/80 font-mono text-xs font-bold tracking-wider text-amber shadow-inner">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div>
-                <h3 class="font-display text-xl font-bold tracking-tight text-ink">
+                <h3 class="font-display text-lg font-bold tracking-tight text-ink transition-colors duration-200 group-hover:text-amber">
                   {point.title}
                 </h3>
-                <p class="mt-2.5 text-[15px] leading-[1.9] text-muted">{point.desc}</p>
+                <p class="mt-2 text-[14.5px] leading-[1.85] text-muted">{point.desc}</p>
               </div>
             </li>
           ))

@@ -36,21 +36,28 @@ const cli = [
 
     <div class="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-14">
       <div class="reveal">
-        <div class="panel noise overflow-hidden">
-          <div class="flex items-center gap-2 border-b border-line px-5 py-3.5">
-            <span class="h-2 w-2 rounded-full bg-amber/70"></span>
-            <span class="font-mono text-[11px] tracking-[0.16em] text-faint">extensions/services/</span>
+        <div class="panel noise overflow-hidden shadow-[0_20px_50px_-20px_rgba(0,0,0,0.6)]">
+          <div class="flex items-center justify-between border-b border-line bg-base-950/70 px-5 py-3.5">
+            <div class="flex items-center gap-2">
+              <div class="flex items-center gap-1.5" aria-hidden="true">
+                <span class="h-2 w-2 rounded-full bg-[#ef4444]/70"></span>
+                <span class="h-2 w-2 rounded-full bg-[#eab308]/70"></span>
+                <span class="h-2 w-2 rounded-full bg-[#22c55e]/70"></span>
+              </div>
+              <span class="font-mono text-[11px] tracking-[0.16em] text-faint ml-2">extensions/services/</span>
+            </div>
+            <span class="font-mono text-[10px] text-faint">YAML / Compose</span>
           </div>
           <pre
-            class="overflow-x-auto px-5 py-5 font-mono text-[12.5px] leading-loose text-ink/90"
+            class="overflow-x-auto px-5 py-5 font-mono text-[12.5px] leading-loose text-ink/90 bg-base-950/50"
           >extensions/services/
   my-service/
     manifest.yaml      <span class="text-faint"># 元数据：名称、端口、健康端点、GPU 后端</span>
     compose.yaml       <span class="text-faint"># Docker Compose 片段（自动合并进技术栈）</span>
 
-<span class="text-faint">$ </span>ods enable my-service     <span class="text-faint"># 启用它</span>
-<span class="text-faint">$ </span>ods disable my-service    <span class="text-faint"># 禁用它</span>
-<span class="text-faint">$ </span>ods list                  <span class="text-faint"># 查看全部</span></pre>
+<span class="text-amber font-bold">$ </span>ods enable my-service     <span class="text-faint"># 启用它</span>
+<span class="text-amber font-bold">$ </span>ods disable my-service    <span class="text-faint"># 禁用它</span>
+<span class="text-amber font-bold">$ </span>ods list                  <span class="text-faint"># 查看全部</span></pre>
         </div>
 
         <div class="mt-6 flex flex-wrap gap-3">
@@ -58,35 +65,48 @@ const cli = [
             href="https://github.com/Osmantic/ODS/blob/main/ods/docs/EXTENSIONS.md"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 rounded-full border border-line px-5 py-3 text-sm text-ink transition-all duration-200 hover:-translate-y-0.5 hover:border-amber/50 hover:text-amber active:scale-[0.98]"
+            class="btn-tactile group gap-2 rounded-full border border-line bg-base-900/60 px-5 py-2.5 text-sm text-ink shadow-sm hover:border-amber/50 hover:text-amber"
           >
-            完整扩展指南
+            <span>完整扩展指南</span>
+            <svg class="h-3.5 w-3.5 text-faint transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-amber" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
           </a>
           <a
             href="https://github.com/Osmantic/ODS/blob/main/ods/docs/INSTALLER-ARCHITECTURE.md"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 rounded-full border border-line px-5 py-3 text-sm text-ink transition-all duration-200 hover:-translate-y-0.5 hover:border-amber/50 hover:text-amber active:scale-[0.98]"
+            class="btn-tactile group gap-2 rounded-full border border-line bg-base-900/60 px-5 py-2.5 text-sm text-ink shadow-sm hover:border-amber/50 hover:text-amber"
           >
-            安装器架构
+            <span>安装器架构</span>
+            <svg class="h-3.5 w-3.5 text-faint transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-amber" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
           </a>
         </div>
       </div>
 
-      <div class="reveal">
-        <h3 class="font-display text-xl font-bold tracking-tight">ods-cli</h3>
-        <p class="mt-3 text-[14.5px] leading-[1.9] text-muted">
+      <div class="reveal panel noise p-6 sm:p-7">
+        <div class="flex items-center justify-between border-b border-line pb-4">
+          <h3 class="font-display text-xl font-bold tracking-tight text-ink">ods-cli 命令大全</h3>
+          <span class="rounded-full bg-base-950/80 px-2.5 py-0.5 font-mono text-[11px] text-amber border border-line">
+            11 条常用管理指令
+          </span>
+        </div>
+        <p class="mt-3 text-[14px] leading-relaxed text-muted">
           <code class="rounded bg-base-800 px-1.5 py-0.5 font-mono text-[13px] text-amber">ods</code>
-          CLI 管理你的整个技术栈：
+          CLI 集中管理你的整个本地 AI 技术栈生命周期：
         </p>
-        <dl class="mt-6 divide-y divide-line border-y border-line">
+        <dl class="mt-5 divide-y divide-line/60">
           {
             cli.map(([cmd, desc]) => (
-              <div class="group grid grid-cols-1 gap-1.5 py-4 transition-colors duration-200 hover:bg-base-800/40 sm:grid-cols-[13.5rem_1fr] sm:gap-6">
-                <dt class="font-mono text-[12.5px] text-ink transition-colors duration-200 group-hover:text-amber">
+              <div class="group grid grid-cols-1 gap-1 py-3 transition-colors duration-150 sm:grid-cols-[13rem_1fr] sm:gap-4 hover:bg-base-950/40 rounded-lg px-2 -mx-2">
+                <dt class="font-mono text-[12.5px] font-medium text-ink transition-colors duration-150 group-hover:text-amber">
                   {cmd}
                 </dt>
-                <dd class="text-[13.5px] leading-[1.8] text-muted">{desc}</dd>
+                <dd class="text-[13px] leading-[1.8] text-muted">{desc}</dd>
               </div>
             ))
           }

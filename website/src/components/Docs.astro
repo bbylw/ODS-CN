@@ -1,0 +1,67 @@
+---
+const base = "https://github.com/Osmantic/ODS/blob/main/ods";
+
+const docs = [
+  ["快速开始", "带排障的逐步安装指南", `${base}/QUICKSTART.md`],
+  ["文档索引", "面向运维、贡献者与审阅者的维护地图", `${base}/docs/README.md`],
+  ["Portal 运行时", "资格、许可证边界、架构、安装、安全与回滚", `${base}/docs/PIXEL.md`],
+  ["许可", "Apache-2.0 的 ODS 代码与 Pixel 的仅限 ODS 授权", `${base}/LICENSING.md`],
+  ["在 ODS 上构建", "派生、自定义版本、扩展模板与下游验证", `${base}/docs/BUILD-ON-ODS-SERVER.md`],
+  ["可派生性", "如何派生、审计、定制并独立运营 ODS", `${base}/docs/FORKABILITY.md`],
+  ["支持矩阵", "当前平台与 GPU 支持状态", `${base}/docs/SUPPORT-MATRIX.md`],
+  ["发布验证", "用户级验收闸口与发布级机群验证策略", `${base}/docs/RELEASE_VALIDATION.md`],
+  ["V3 发布说明", "已发布的 V3 源代码身份与资格边界", `${base}/docs/RELEASE_NOTES_3.0.0.md`],
+  ["验证矩阵", "脱敏后的 CI、发行版实验室与真实硬件机群证据", `${base}/docs/VALIDATION-MATRIX.md`],
+  ["离线与时镜像", "版本钉固、镜像与发布产物留存", `${base}/docs/OFFLINE_AND_MIRRORING.md`],
+  ["安装器信任", "先检查后安装的路径与引用钉固", `${base}/docs/INSTALLER_TRUST.md`],
+  ["模型管理", "GGUF 发现、已验证导入、切换与恢复", `${base}/docs/MODEL-MANAGEMENT.md`],
+  ["硬件指南", "该买什么、层级建议", `${base}/docs/HARDWARE-GUIDE.md`],
+  ["常见问题", "常见问题与配置", `${base}/FAQ.md`],
+  ["扩展", "如何添加自定义服务", `${base}/docs/EXTENSIONS.md`],
+  ["安装器架构", "模块化安装器深度解析", `${base}/docs/INSTALLER-ARCHITECTURE.md`],
+  ["更新日志", "版本历史与发布说明", `${base}/CHANGELOG.md`],
+];
+---
+
+<section id="docs" class="relative border-b border-line">
+  <div class="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:py-32">
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+      <div class="max-w-2xl">
+        <p class="reveal eyebrow">Documentation</p>
+        <h2
+          class="reveal mt-5 font-display text-[clamp(2rem,4.2vw,3.4rem)] font-bold leading-[1.15] tracking-tight"
+        >
+          文档
+        </h2>
+      </div>
+      <p class="reveal max-w-md text-[15px] leading-[1.95] text-muted">
+        README 只聚焦于产品概览；长篇的致谢、上游鸣谢与贡献者历史收录在 CONTRIBUTORS.md。
+        以下文档覆盖安装、运维、验证、安全与派生。
+      </p>
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 gap-x-14 md:grid-cols-2">
+      {
+        docs.map(([title, desc, href], i) => (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="reveal group flex items-start justify-between gap-6 border-b border-line py-6 transition-colors duration-200 hover:border-amber/40"
+            style={`--reveal-delay: ${(i % 2) * 60}ms`}
+          >
+            <div>
+              <h3 class="font-display text-[17px] font-bold tracking-tight text-ink transition-colors duration-200 group-hover:text-amber">
+                {title}
+              </h3>
+              <p class="mt-1.5 text-[13.5px] leading-[1.8] text-muted">{desc}</p>
+            </div>
+            <span class="mt-1 font-mono text-xs text-faint transition-all duration-200 group-hover:translate-x-1 group-hover:text-amber">
+              ↗
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

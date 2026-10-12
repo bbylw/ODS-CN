@@ -1,0 +1,98 @@
+---
+const groups = [
+  {
+    title: "聊天与推理",
+    items: [
+      ["Open WebUI", "功能完整的聊天界面：对话历史、Web 搜索、文档上传，30+ 种语言"],
+      ["llama-server", "高性能 LLM 推理，连续批处理，为你的 GPU 自动选择"],
+      ["LiteLLM", "支持本地 / 云端 / 混合模式的 API 网关"],
+      ["TEI Embeddings", "用于 RAG 与搜索工作流的文本嵌入服务"],
+    ],
+  },
+  {
+    title: "语音",
+    items: [
+      ["Whisper", "语音转文本"],
+      ["Kokoro", "文本转语音"],
+    ],
+  },
+  {
+    title: "智能体与自动化",
+    items: [
+      ["Portal", "捆绑的核心对话助手，无需私有仓库访问权限或许可证标志"],
+      ["Hermes Agent", "独立的通用智能体：记忆、技能与可选门控代理"],
+      ["n8n", "工作流自动化，400+ 集成（Slack、邮件、数据库、API）"],
+      ["APE", "用于审计与治理自主工具调用的智能体策略引擎"],
+      ["OpenCode", "接入本地技术栈的浏览器版 AI 编程助手"],
+      ["Memory Shepherd", "用于智能体记忆生命周期管理的宿主辅助进程"],
+    ],
+  },
+  {
+    title: "知识与搜索",
+    items: [
+      ["Qdrant", "用于检索增强生成（RAG）的向量数据库"],
+      ["SearXNG", "自托管的 Web 搜索，无追踪"],
+      ["Perplexica", "深度研究引擎"],
+      ["Brave Search", "可选的付费 Brave Search API 集成"],
+    ],
+  },
+  {
+    title: "创意",
+    items: [["ComfyUI", "基于节点的图像生成"]],
+  },
+  {
+    title: "隐私与运维",
+    items: [
+      ["Privacy Shield", "用于 API 调用的 PII 擦除代理"],
+      ["Dashboard", "实时 GPU 指标、服务健康度、模型管理"],
+      ["Dashboard API", "服务健康、安装、状态、指标与管理 API"],
+      ["Token Spy", "面向本地与代理 LLM 流量的令牌用量监视器"],
+      ["Langfuse", "可选的 LLM 可观测性与链路追踪"],
+    ],
+  },
+];
+---
+
+<section id="stack" class="relative border-b border-line">
+  <div class="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:py-32">
+    <div class="max-w-3xl">
+      <p class="reveal eyebrow">The stack</p>
+      <h2
+        class="reveal mt-5 font-display text-[clamp(2rem,4.2vw,3.4rem)] font-bold leading-[1.15] tracking-tight"
+      >
+        盒子里有什么
+      </h2>
+      <p class="reveal mt-6 text-[16px] leading-[2] text-muted">
+        默认的 Core 安装给出本地推理、控制台与一个聊天界面。其余组件可从安装器菜单或扩展页添加，它们彼此之间已经接好。
+      </p>
+    </div>
+
+    <div class="mt-14 grid grid-cols-1 gap-x-16 gap-y-14 lg:grid-cols-2">
+      {
+        groups.map((group, gi) => (
+          <div class="reveal" style={`--reveal-delay: ${(gi % 2) * 90}ms`}>
+            <div class="flex items-center gap-4">
+              <h3 class="font-display text-lg font-bold tracking-tight text-amber">
+                {group.title}
+              </h3>
+              <span class="h-px flex-1 bg-line" />
+              <span class="font-mono text-[11px] text-faint">
+                {String(group.items.length).padStart(2, "0")}
+              </span>
+            </div>
+            <dl class="mt-2 divide-y divide-line border-b border-line">
+              {group.items.map(([name, desc]) => (
+                <div class="group grid grid-cols-1 gap-1 py-5 transition-colors duration-200 hover:bg-base-800/40 sm:grid-cols-[11.5rem_1fr] sm:gap-6">
+                  <dt class="font-mono text-[13px] text-ink transition-colors duration-200 group-hover:text-amber">
+                    {name}
+                  </dt>
+                  <dd class="text-[14px] leading-[1.85] text-muted">{desc}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

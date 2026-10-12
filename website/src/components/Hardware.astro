@@ -1,0 +1,149 @@
+---
+const tables = [
+  {
+    platform: "NVIDIA",
+    head: ["显存", "默认选择", "上下文", "示例硬件"],
+    rows: [
+      ["8–16 GB", "Qwen3.5 9B (Q4_K_M)", "64K", "RTX 4060 / 4070 级别"],
+      ["24–32 GB", "Qwen3.5 27B (Q4_K_M)", "64K", "RTX 4090 / 5090"],
+      ["48 GB", "Qwen3.6 35B-A3B (UD-Q4_K_M)", "128K", "RTX 6000 Ada / L40S"],
+      ["96 GB+ (x86_64)", "Qwen3 Coder Next (Q4_K_M)", "128K", "RTX PRO 6000 / 多 GPU"],
+      ["128 GB (arm64)", "Qwen3.6 35B-A3B (UD-Q4_K_M)", "128K", "DGX Spark / GB10"],
+    ],
+  },
+  {
+    platform: "AMD Strix Halo · 统一内存",
+    head: ["内存", "默认选择", "上下文", "硬件"],
+    rows: [["64–128 GB", "Qwen3.6 35B-A3B (UD-Q4_K_M)", "128K", "Ryzen AI MAX+ 395"]],
+  },
+  {
+    platform: "Apple Silicon · Metal",
+    head: ["内存", "默认选择", "上下文", "示例硬件"],
+    rows: [
+      ["8 GB", "NVIDIA Nemotron3 Nano 4B (Q4_K_M)", "64K", "M1 / M2 基础款"],
+      ["16–36 GB", "Qwen3.5 9B (Q4_K_M)", "64K", "M4 Mac mini / M3 Pro"],
+      ["48 GB+", "Qwen3.6 35B-A3B (UD-Q4_K_M)", "128K", "M4 Pro/Max / Mac Studio"],
+    ],
+  },
+  {
+    platform: "仅 CPU",
+    head: ["系统内存", "默认选择", "上下文"],
+    rows: [
+      ["8–12 GB", "Qwen3.5 2B (Q4_K_M)", "64K"],
+      ["16–20 GB", "Qwen3.5 4B (Q4_K_M)", "64K"],
+      ["24 GB+", "Qwen3.5 9B (Q4_K_M)", "64K"],
+    ],
+  },
+];
+---
+
+<section id="hardware" class="relative border-b border-line">
+  <div class="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:py-32">
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+      <div class="lg:sticky lg:top-28 lg:self-start">
+        <p class="reveal eyebrow">Hardware</p>
+        <h2
+          class="reveal mt-5 font-display text-[clamp(2rem,4vw,3.1rem)] font-bold leading-[1.15] tracking-tight"
+        >
+          硬件自动检测，
+          <span class="text-amber">模型自动匹配</span>
+        </h2>
+        <p class="reveal mt-6 text-[15px] leading-[2] text-muted">
+          安装器会检测你的 GPU，并首先分配一个确定性的硬件层级。随后 Linux 与 macOS
+          运行带版本的目录选择器，Windows 使用 PowerShell 目录选择器；二者都读取
+          <code class="rounded bg-base-800 px-1.5 py-0.5 font-mono text-[12.5px] text-ink"
+            >model-library.json</code
+          >，在检测到的内存区间内挑选可安装的最佳 GGUF。
+        </p>
+        <p class="reveal mt-4 text-[15px] leading-[2] text-muted">
+          最终选择写入
+          <code class="rounded bg-base-800 px-1.5 py-0.5 font-mono text-[12.5px] text-ink"
+            >.env</code
+          > 中的
+          <code class="rounded bg-base-800 px-1.5 py-0.5 font-mono text-[12px] text-amber"
+            >LLM_MODEL</code
+          >、
+          <code class="rounded bg-base-800 px-1.5 py-0.5 font-mono text-[12px] text-amber"
+            >GGUF_FILE</code
+          >、
+          <code class="rounded bg-base-800 px-1.5 py-0.5 font-mono text-[12px] text-amber"
+            >MAX_CONTEXT</code
+          > 等变量。
+        </p>
+
+        <div class="reveal mt-8 rounded-2xl border border-line bg-base-900/60 p-6">
+          <p class="font-mono text-[11px] tracking-[0.16em] text-amber">切换模型</p>
+          <p class="mt-3 text-[14px] leading-[1.95] text-muted">
+            推荐的方式是 控制台 → Models：它会列出适配你硬件的模型，以校验和验证方式下载并加载。若某个模型启动失败，ODS 会恢复为上一个模型。
+          </p>
+          <pre
+            class="mt-4 overflow-x-auto rounded-xl border border-line bg-base-950/70 p-4 font-mono text-[12px] leading-[1.9] text-ink/90"
+          ><span class="text-faint">$ </span>ods model current
+<span class="text-faint">$ </span>ods restart llm</pre>
+          <p class="mt-3 text-[12.5px] leading-[1.85] text-faint">
+            已有 GGUF？把单个 .gguf 文件放进 data/models/，然后在控制台中加载这个本地条目。
+          </p>
+        </div>
+      </div>
+
+      <div class="space-y-12">
+        {
+          tables.map((t, i) => (
+            <div class="reveal" style={`--reveal-delay: ${i * 80}ms`}>
+              <div class="flex items-center gap-4">
+                <h3 class="font-display text-lg font-bold tracking-tight text-ink">{t.platform}</h3>
+                <span class="h-px flex-1 bg-line" />
+              </div>
+              <div class="mt-4 overflow-x-auto">
+                <table class="w-full min-w-[520px] border-collapse text-left">
+                  <thead>
+                    <tr>
+                      {t.head.map((h) => (
+                        <th class="border-b border-line pb-3 font-mono text-[10.5px] font-normal uppercase tracking-[0.16em] text-faint">
+                          {h}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {t.rows.map((row) => (
+                      <tr class="group border-b border-line/70 transition-colors duration-200 hover:bg-base-800/40">
+                        {row.map((cell, ci) => (
+                          <td
+                            class={`py-4 pr-6 align-top text-[13.5px] leading-[1.8] ${
+                              ci === 1
+                                ? "font-mono text-[12.5px] text-amber"
+                                : ci === 0
+                                  ? "font-mono text-ink"
+                                  : "text-muted"
+                            }`}
+                          >
+                            {cell}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ))
+        }
+
+        <div class="reveal rounded-2xl border border-line bg-base-900/60 p-6">
+          <p class="font-mono text-[11px] tracking-[0.16em] text-amber">Intel Arc · 实验性</p>
+          <p class="mt-3 text-[14px] leading-[1.95] text-muted">
+            Intel Arc 属于实验性（C 级），硬件检测目前还无法识别 Arc GPU，请自行传入层级：
+            对 6–8 GB 显卡用
+            <code class="rounded bg-base-800 px-1.5 py-0.5 font-mono text-[12.5px] text-ink"
+              >./install.sh --tier ARC_LITE</code
+            >，对 16 GB 显卡用
+            <code class="rounded bg-base-800 px-1.5 py-0.5 font-mono text-[12.5px] text-ink"
+              >--tier ARC</code
+            >。统一内存主机会避开 Qwen3 Coder Next，因为在这些后端上存在已记录的正确性问题。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

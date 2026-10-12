@@ -1,0 +1,182 @@
+---
+import InstallTabs from "./InstallTabs.tsx";
+
+const services = [
+  { name: "llama-server", detail: "本地推理 · 连续批处理", state: "运行中" },
+  { name: "Portal", detail: "核心对话助手", state: "运行中" },
+  { name: "Open WebUI", detail: "聊天界面 · :3000", state: "运行中" },
+  { name: "Qdrant", detail: "向量数据库 · RAG", state: "运行中" },
+  { name: "ComfyUI", detail: "图像生成", state: "已启用" },
+];
+
+const marquee = [
+  "Ollama",
+  "llama.cpp",
+  "Open WebUI",
+  "n8n",
+  "ComfyUI",
+  "Whisper",
+  "Kokoro",
+  "Qdrant",
+  "SearXNG",
+  "Perplexica",
+  "LiteLLM",
+  "TEI Embeddings",
+  "Langfuse",
+  "OpenCode",
+  "Hermes Agent",
+];
+---
+
+<section id="top" class="atmosphere noise relative overflow-hidden">
+  <div
+    class="mx-auto grid max-w-[1400px] grid-cols-1 gap-14 px-5 pb-16 pt-32 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10 lg:pb-24 lg:pt-40"
+  >
+    <div>
+      <div class="reveal flex flex-wrap items-center gap-3">
+        <span
+          class="rounded-full border border-amber/40 bg-amber/10 px-3 py-1.5 font-mono text-[11px] tracking-[0.18em] text-amber"
+        >
+          ODS V3 · 预发布
+        </span>
+        <span class="flex items-center gap-2 font-mono text-[11px] tracking-[0.14em] text-faint">
+          <span class="breathe h-1.5 w-1.5 rounded-full bg-moss"></span>
+          无遥测 · 数据不出本机
+        </span>
+      </div>
+
+      <h1
+        class="reveal mt-7 max-w-[16ch] font-display text-[clamp(2.5rem,6.4vw,5.1rem)] font-bold leading-[1.04] tracking-tighter"
+        style="--reveal-delay: 90ms"
+      >
+        把你的 PC、Mac 或 Linux
+        <span class="text-amber">变成一台私有 AI 服务器</span>
+      </h1>
+
+      <p
+        class="reveal mt-7 max-w-[52ch] text-[17px] leading-[1.9] text-muted"
+        style="--reveal-delay: 180ms"
+      >
+        AI 服务器与家庭实验室的搭建，正迅速成为一件已被解决的问题。
+        ODS 会安装并串联起你在本地运行 AI 所需的全部组件——推理、聊天界面、控制台、语音、智能体、RAG、搜索与图像生成，
+        你不必再手动拼装 Ollama、Open WebUI、n8n、ComfyUI 以及各种隐私工具。
+      </p>
+
+      <div class="reveal mt-9 flex flex-wrap items-center gap-3" style="--reveal-delay: 260ms">
+        <a
+          href="#quickstart"
+          class="group inline-flex items-center gap-2 rounded-full bg-amber px-6 py-3.5 text-[15px] font-medium text-base-950 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_-12px_rgba(224,162,74,0.45)] active:scale-[0.98]"
+        >
+          一条命令开始安装
+          <span class="transition-transform duration-200 group-hover:translate-x-1">→</span>
+        </a>
+        <a
+          href="https://youtu.be/nO8xFNHX-HA"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-full border border-line px-6 py-3.5 text-[15px] text-ink transition-all duration-200 hover:-translate-y-0.5 hover:border-amber/50 hover:text-amber active:scale-[0.98]"
+        >
+          观看演示
+          <span class="font-mono text-xs text-faint">YouTube</span>
+        </a>
+      </div>
+
+      <dl
+        class="reveal mt-12 grid max-w-2xl grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-4"
+        style="--reveal-delay: 340ms"
+      >
+        {
+          [
+            ["3", "受支持平台"],
+            ["40GB", "磁盘空间起"],
+            ["0", "遥测数据收集"],
+            ["Apache", "2.0 开源许可"],
+          ].map(([value, label]) => (
+            <div class="bg-base-900 px-4 py-4">
+              <dt class="font-display text-xl font-bold tracking-tight text-ink">{value}</dt>
+              <dd class="mt-1 text-xs text-faint">{label}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
+    <div class="reveal relative lg:pt-10" style="--reveal-delay: 220ms">
+      <div
+        class="panel noise relative overflow-hidden rounded-[1.75rem] shadow-[0_40px_120px_-40px_rgba(0,0,0,0.9)]"
+      >
+        <div class="flex items-center justify-between border-b border-line px-5 py-3.5">
+          <div class="flex items-center gap-2">
+            <span class="h-2 w-2 rounded-full bg-moss/80"></span>
+            <span class="font-mono text-[11px] tracking-[0.18em] text-muted">控制台 · 实时</span>
+          </div>
+          <span class="font-mono text-[11px] text-faint">localhost:3001</span>
+        </div>
+
+        <div class="space-y-2 px-4 py-4">
+          {
+            services.map((s, i) => (
+              <div
+                class="flex items-center justify-between rounded-xl border border-line/70 bg-base-950/50 px-4 py-3 transition-colors duration-200 hover:border-amber/30"
+                style={`transition-delay: ${i * 40}ms`}
+              >
+                <div>
+                  <p class="font-mono text-[13px] text-ink">{s.name}</p>
+                  <p class="mt-0.5 text-[11px] text-faint">{s.detail}</p>
+                </div>
+                <span class="flex items-center gap-1.5 font-mono text-[11px] text-moss">
+                  <span class="h-1.5 w-1.5 rounded-full bg-moss/80" />
+                  {s.state}
+                </span>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="grid grid-cols-3 gap-px border-t border-line bg-line">
+          {
+            [
+              ["GPU", "74%"],
+              ["显存", "21.4 GB"],
+              ["上下文", "64K"],
+            ].map(([label, value]) => (
+              <div class="bg-base-900 px-4 py-3.5">
+                <p class="font-mono text-[10px] tracking-[0.16em] text-faint">{label}</p>
+                <p class="mt-1 font-display text-lg font-bold text-ink">{value}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <p class="mt-4 pl-2 font-mono text-[11px] leading-relaxed text-faint">
+        // 控制台界面示意 — GPU 指标、服务健康度与模型管理集中一处
+      </p>
+    </div>
+  </div>
+
+  <div class="reveal mx-auto max-w-[1400px] px-5 sm:px-8">
+    <InstallTabs client:load />
+  </div>
+
+  <div class="relative mt-16 overflow-hidden border-y border-line py-5">
+    <div class="marquee-track flex w-max gap-10 whitespace-nowrap">
+      {
+        [...marquee, ...marquee].map((name) => (
+          <span class="flex items-center gap-10 font-mono text-sm tracking-wide text-faint">
+            {name}
+            <span class="h-1 w-1 rounded-full bg-amber/50" />
+          </span>
+        ))
+      }
+    </div>
+    <div
+      class="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-base-950 to-transparent"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-base-950 to-transparent"
+    >
+    </div>
+  </div>
+</section>

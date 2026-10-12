@@ -1,0 +1,80 @@
+---
+const points = [
+  {
+    title: "一条命令",
+    desc: "检测你的 GPU，挑选合适的模型，生成凭证，启动一切。",
+  },
+  {
+    title: "尽早聊天",
+    desc: "引导模式会在核心服务一上线时先启动一个小型模型，完整模型在后台下载。",
+  },
+  {
+    title: "预先接好的服务",
+    desc: "默认 Core 安装给出本地推理、控制台与聊天界面；语音、工作流、搜索、RAG、图像生成可随时从菜单添加，彼此已经接好。",
+  },
+  {
+    title: "完全可魔改",
+    desc: "每个服务都是一个扩展。丢进一个文件夹，运行 ods enable，就完成了。",
+  },
+];
+---
+
+<section id="why" class="relative border-b border-line">
+  <div class="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:py-32">
+    <div class="grid grid-cols-1 gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
+      <div>
+        <p class="reveal eyebrow">Why ODS</p>
+        <div class="reveal rule-amber mt-5"></div>
+        <h2
+          class="reveal mt-8 font-display text-[clamp(2rem,4.2vw,3.4rem)] font-bold leading-[1.15] tracking-tight"
+        >
+          如果 AI 正在成为关键基础设施，
+          <span class="text-amber">它就不该被租用。</span>
+        </h2>
+        <div class="mt-8 space-y-6 text-[16px] leading-[2] text-muted">
+          <p class="reveal">
+            少数几家公司掌控着全球绝大部分的 AI 流量——以及随之而来的你的数据、你的成本与你的可用性。
+            你发往某个中心化服务商的每一条查询，都是一份你并不拥有的商业情报，
+            跑在你无法控制的基础设施上，按你无法协商的条款计价。
+          </p>
+          <p class="reveal">
+            自托管本地 AI 应当是一项与生俱来的人权，而不是一种职业选择。
+            因为运行你自己的 AI，本不该需要先拿到一个计算机学位，再花一整个周末去调试 CUDA 驱动。
+          </p>
+          <p class="reveal text-ink">
+            我们打造 ODS，就是为了让你可以不必如此。
+          </p>
+        </div>
+
+        <div
+          class="reveal mt-10 rounded-2xl border border-amber/25 bg-amber/[0.06] p-6 text-[14px] leading-[1.95] text-muted"
+        >
+          <p class="font-medium text-amber">隐私默认成立</p>
+          <p class="mt-2">
+            推理过程、聊天记录与你的文件都留在你自己的机器上，ODS 不收集任何遥测数据。
+            默认情况下，它只在以下情况联网：下载模型与容器镜像、到 GitHub 检查 ODS 更新，
+            以及运行 Portal 智能体为你发起的网络搜索。云端与混合 API 模式是可选的。
+          </p>
+        </div>
+      </div>
+
+      <ol class="reveal divide-y divide-line border-y border-line">
+        {
+          points.map((point, i) => (
+            <li class="group grid grid-cols-[3.25rem_1fr] gap-5 py-8 transition-colors duration-300 hover:bg-base-800/40">
+              <span class="pt-1 font-mono text-xs tracking-[0.18em] text-amber/80">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div>
+                <h3 class="font-display text-xl font-bold tracking-tight text-ink">
+                  {point.title}
+                </h3>
+                <p class="mt-2.5 text-[15px] leading-[1.9] text-muted">{point.desc}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>

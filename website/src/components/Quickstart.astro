@@ -1,0 +1,145 @@
+---
+const prerequisites = [
+  {
+    label: "Linux",
+    desc: "必须先安装并运行 Docker。CI 在 Ubuntu 26.04/24.04/22.04、Debian 12、Fedora 41、Arch、openSUSE Tumbleweed 等发行版上冒烟测试安装器前置条件。",
+  },
+  {
+    label: "macOS",
+    desc: "需要 Apple Silicon（M1+）与 Docker Desktop。llama-server 使用原生 Metal 加速；请把克隆目录放在主文件夹的 ods 路径之外，以免与默认安装目录 ~/ods 冲突。",
+  },
+  {
+    label: "Windows",
+    desc: "需要带 WSL2 后端的 Docker Desktop，由安装器代为准备。NVIDIA 机器请先把 Windows 驱动更新到 570 或更高版本；AMD 走 llama.cpp（Vulkan）路径。",
+  },
+];
+
+const windowsSteps = [
+  "检查可用磁盘空间（40 GB）以及硬件虚拟化是否已开启。",
+  "提供选项以启用 WSL2，并用 winget 安装 Docker Desktop。Windows 会请求管理员权限，然后重启一次；重新登录后安装会自动继续。",
+  "提供选项下载 Ubuntu 24.04，并在 PowerShell 中询问新的 Ubuntu 用户名与密码。",
+  "启动 Docker Desktop，并检查它是否已连接到 Ubuntu。若未连接，会提示你开启那一个设置，一旦连通便立即继续。",
+  "在 Ubuntu 内以 --pixel --no-hermes 安装 ODS。当 Ubuntu 询问 [sudo] password 时，输入 Ubuntu 密码即可，输入时屏幕上没有任何显示。",
+  "验证 Pixel 与 Portal，然后在浏览器中打开 Portal，并向桌面添加一个 ODS Portal 快捷方式。",
+];
+
+const bootstrap = [
+  ["01", "安装器下载 Qwen3.5 2B（约 1.3 GB）并启动它。"],
+  ["02", "核心服务一上线，你就可以开始聊天。"],
+  ["03", "适合你硬件的完整模型在后台下载。"],
+  ["04", "下载通过校验后，ODS 以完整模型重启模型服务器。"],
+];
+---
+
+<section id="quickstart" class="relative border-b border-line">
+  <div class="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:py-32">
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+      <div class="max-w-2xl">
+        <p class="reveal eyebrow">Quickstart</p>
+        <h2
+          class="reveal mt-5 font-display text-[clamp(2rem,4.2vw,3.4rem)] font-bold leading-[1.15] tracking-tight"
+        >
+          选择你的系统，
+          <span class="text-amber">复制、粘贴、回车</span>
+        </h2>
+      </div>
+      <a
+        href="#top"
+        class="reveal inline-flex items-center gap-2 self-start rounded-full border border-line px-5 py-3 text-sm text-muted transition-all duration-200 hover:-translate-y-0.5 hover:border-amber/50 hover:text-amber active:scale-[0.98]"
+      >
+        ↑ 回到安装命令
+      </a>
+    </div>
+
+    <div class="mt-14 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <h3 class="reveal font-display text-xl font-bold tracking-tight">前置条件</h3>
+        <dl class="reveal mt-2 divide-y divide-line border-y border-line">
+          {
+            prerequisites.map((p) => (
+              <div class="py-6">
+                <dt class="font-mono text-[13px] tracking-wide text-amber">{p.label}</dt>
+                <dd class="mt-2.5 text-[14.5px] leading-[1.9] text-muted">{p.desc}</dd>
+              </div>
+            ))
+          }
+        </dl>
+
+        <h3 class="reveal mt-12 font-display text-xl font-bold tracking-tight">引导模式</h3>
+        <p class="reveal mt-3 text-[14.5px] leading-[1.9] text-muted">
+          ODS 默认使用引导模式，这样你可以在大模型下载完成之前就开始使用。引导模型以 64K
+          上下文窗口启动，交换完成后恢复完整模型的上下文目标。跳过引导：<code
+            class="rounded bg-base-800 px-1.5 py-0.5 font-mono text-[12.5px] text-amber"
+            >./install.sh --no-bootstrap</code
+          >
+        </p>
+        <ol class="reveal mt-6 space-y-3">
+          {
+            bootstrap.map(([n, text]) => (
+              <li class="flex items-start gap-4 rounded-xl border border-line bg-base-900/60 px-5 py-4 transition-colors duration-200 hover:border-amber/30">
+                <span class="pt-0.5 font-mono text-[11px] tracking-[0.18em] text-amber/80">{n}</span>
+                <p class="text-[14px] leading-[1.85] text-muted">{text}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+
+      <div>
+        <h3 class="reveal font-display text-xl font-bold tracking-tight">
+          Windows 安装器会做什么
+        </h3>
+        <p class="reveal mt-3 text-[14.5px] leading-[1.9] text-muted">
+          每一步在更改任何内容前都会先征求你的同意；若无法完成，会停下来并给出处理说明；修复后重新运行同一条命令即可。
+          已有的原生 Windows 安装不会被自动迁移或删除。
+        </p>
+        <ol class="reveal mt-6 space-y-0 border-y border-line">
+          {
+            windowsSteps.map((step, i) => (
+              <li class="group grid grid-cols-[2.75rem_1fr] gap-4 border-b border-line py-5 transition-colors duration-200 last:border-b-0 hover:bg-base-800/40">
+                <span class="pt-0.5 font-mono text-[11px] tracking-[0.18em] text-faint transition-colors group-hover:text-amber">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <p class="text-[14px] leading-[1.9] text-muted">{step}</p>
+              </li>
+            ))
+          }
+        </ol>
+
+        <div class="reveal mt-8 space-y-4">
+          <div class="rounded-2xl border border-line bg-base-900/60 p-6">
+            <p class="font-mono text-[11px] tracking-[0.16em] text-amber">安装后验证</p>
+            <p class="mt-3 text-[14px] leading-[1.95] text-muted">
+              安装器成功完成后，Portal 会在
+              <code class="rounded bg-base-800 px-1.5 py-0.5 font-mono text-[12.5px] text-ink"
+                >http://localhost:3001/pixel</code
+              >
+              打开；<code class="rounded bg-base-800 px-1.5 py-0.5 font-mono text-[12.5px] text-ink"
+                >http://localhost:3000</code
+              > 是 Open WebUI，一个独立的界面。请验证 Portal 可用并发送一条消息——仅仅是加载出一个控制台，并不代表 Pixel 已就绪。
+            </p>
+          </div>
+          <div class="rounded-2xl border border-line bg-base-900/60 p-6">
+            <p class="font-mono text-[11px] tracking-[0.16em] text-amber">API 端点</p>
+            <p class="mt-3 text-[14px] leading-[1.95] text-muted">
+              Linux 的 Docker 安装默认在
+              <code class="rounded bg-base-800 px-1.5 py-0.5 font-mono text-[12.5px] text-ink"
+                >localhost:11434</code
+              >
+              暴露 llama-server，容器内部使用
+              <code class="rounded bg-base-800 px-1.5 py-0.5 font-mono text-[12.5px] text-ink"
+                >llama-server:8080</code
+              >。macOS 原生 Metal 与 Windows 的 AMD 路径使用
+              <code class="rounded bg-base-800 px-1.5 py-0.5 font-mono text-[12.5px] text-ink"
+                >localhost:8080</code
+              >。每个端口都可以通过环境变量配置，例如
+              <code class="rounded bg-base-800 px-1.5 py-0.5 font-mono text-[12.5px] text-amber"
+                >WEBUI_PORT=9090 ./install.sh</code
+              >。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

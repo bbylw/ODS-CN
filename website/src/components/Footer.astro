@@ -1,0 +1,95 @@
+---
+const links = [
+  ["GitHub 仓库", "https://github.com/Osmantic/ODS"],
+  ["Osmantic", "https://osmantic.com"],
+  ["演示视频", "https://youtu.be/nO8xFNHX-HA"],
+  ["安全公告", "https://github.com/Osmantic/ODS/security/advisories"],
+  ["许可说明", "https://github.com/Osmantic/ODS/blob/main/ods/LICENSING.md"],
+  ["贡献", "https://github.com/Osmantic/ODS/blob/main/CONTRIBUTING.md"],
+];
+---
+
+<footer class="relative overflow-hidden">
+  <div class="atmosphere">
+    <div class="mx-auto max-w-[1400px] px-5 pt-24 sm:px-8 lg:pt-32">
+      <div class="grid grid-cols-1 gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
+        <div>
+          <h2
+            class="reveal max-w-[18ch] font-display text-[clamp(2.1rem,4.6vw,3.8rem)] font-bold leading-[1.1] tracking-tighter"
+          >
+            在你自己的硬件上，
+            <span class="text-amber">运行你自己的 AI。</span>
+          </h2>
+          <p class="reveal mt-6 max-w-[46ch] text-[16px] leading-[2] text-muted">
+            无需上云。无需订阅。推理过程、聊天记录与你的文件都留在你自己的机器上。
+          </p>
+          <div class="reveal mt-9 flex flex-wrap items-center gap-3">
+            <a
+              href="#top"
+              class="group inline-flex items-center gap-2 rounded-full bg-amber px-6 py-3.5 text-[15px] font-medium text-base-950 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_-12px_rgba(224,162,74,0.45)] active:scale-[0.98]"
+            >
+              获取安装命令
+              <span class="transition-transform duration-200 group-hover:translate-x-1">↑</span>
+            </a>
+            <a
+              href="https://github.com/Osmantic/ODS"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 rounded-full border border-line px-6 py-3.5 text-[15px] text-ink transition-all duration-200 hover:-translate-y-0.5 hover:border-amber/50 hover:text-amber active:scale-[0.98]"
+            >
+              Star on GitHub ↗
+            </a>
+          </div>
+        </div>
+
+        <div class="reveal lg:pt-4">
+          <p class="font-mono text-[11px] tracking-[0.18em] text-faint">STATUS</p>
+          <div class="mt-4 space-y-3">
+            {
+              [
+                ["ODS V3", "预发布 · v3.0.0"],
+                ["许可", "Apache-2.0 + Pixel ODS-only"],
+                ["遥测", "不收集任何遥测数据"],
+                ["平台", "Linux · Windows(WSL2) · macOS"],
+              ].map(([k, v]) => (
+                <div class="flex items-baseline justify-between gap-6 border-b border-line pb-3">
+                  <span class="font-mono text-[12px] text-faint">{k}</span>
+                  <span class="text-right text-[13.5px] text-ink">{v}</span>
+                </div>
+              ))
+            }
+          </div>
+
+          <ul class="mt-8 grid grid-cols-2 gap-x-6 gap-y-3">
+            {
+              links.map(([label, href]) => (
+                <li>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1.5 text-[13.5px] text-muted transition-colors duration-200 hover:text-amber"
+                  >
+                    {label}
+                    <span class="font-mono text-[10px] text-faint">↗</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="mt-20 flex flex-col gap-4 border-t border-line py-8 text-[12.5px] text-faint sm:flex-row sm:items-center sm:justify-between"
+      >
+        <p>
+          ODS 代码采用 Apache-2.0，捆绑的 Pixel 源代码拥有独立的仅限 ODS 的使用与分发授权。
+        </p>
+        <p class="font-mono">
+          由 Osmantic 与那群拒绝租用本应被拥有的东西的人共同打造。
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

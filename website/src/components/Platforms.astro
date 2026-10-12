@@ -1,0 +1,88 @@
+---
+const support = [
+  ["Linux（NVIDIA + AMD Strix Halo）", "已支持", "硬件与发行版限制见支持矩阵"],
+  ["Linux + Intel Arc（SYCL）", "实验性 / C 级", "验证因硬件而异"],
+  ["Windows（NVIDIA + AMD）", "已支持", "现在即可安装运行"],
+  ["macOS（Apple Silicon）", "已支持", "现在即可安装运行"],
+];
+
+const compare = [
+  ["Ollama、llama.cpp 或 LM Studio", "本地模型服务", "对硬件敏感的模型选择、周边服务，以及用于管理它们的控制台"],
+  ["Open WebUI", "带 RAG、语音与图像生成集成的聊天界面", "在本地推理、语音、搜索与图像服务旁安装并配置它，并管理登录与网络暴露"],
+  ["LocalAI", "兼容 OpenAI 的 API，含文本、音频与图像后端", "控制台、Portal 智能体、工作流，以及围绕本地推理的附加应用目录"],
+  ["n8n 的自托管 AI 入门套件", "带本地模型的工作流自动化", "工作流作为受管本地 AI 服务器的一部分"],
+];
+---
+
+<section id="platforms" class="relative border-b border-line">
+  <div class="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:py-32">
+    <div class="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <p class="reveal eyebrow">Platform support</p>
+        <h2
+          class="reveal mt-5 font-display text-[clamp(1.9rem,3.6vw,2.9rem)] font-bold leading-[1.18] tracking-tight"
+        >
+          三个平台，
+          <span class="text-amber">一致的安装体验</span>
+        </h2>
+
+        <dl class="reveal mt-8 divide-y divide-line border-y border-line">
+          {
+            support.map(([platform, status, note]) => (
+              <div class="grid grid-cols-1 gap-2 py-5 sm:grid-cols-[1fr_auto] sm:items-center sm:gap-6">
+                <div>
+                  <dt class="text-[15px] font-medium text-ink">{platform}</dt>
+                  <dd class="mt-1 text-[13px] text-faint">{note}</dd>
+                </div>
+                <span
+                  class={`justify-self-start rounded-full border px-3 py-1.5 font-mono text-[11px] tracking-wide sm:justify-self-end ${
+                    status.startsWith("已支持")
+                      ? "border-moss/40 bg-moss/10 text-moss"
+                      : "border-amber/40 bg-amber/10 text-amber"
+                  }`}
+                >
+                  {status}
+                </span>
+              </div>
+            ))
+          }
+        </dl>
+
+        <div class="reveal mt-8 space-y-4 text-[14px] leading-[1.95] text-muted">
+          <p>
+            <span class="text-ink">Linux 发行版：</span>CI 在 Ubuntu 26.04/24.04/22.04、Debian 12、Linux
+            Mint 21.3、Fedora 41、Rocky Linux 9、Arch Linux、Manjaro、CachyOS 与 openSUSE
+            Tumbleweed 上冒烟测试包管理器检测与安装器前置条件。若你的发行版无法工作，请提交 issue。
+          </p>
+          <p>
+            <span class="text-ink">发布验证：</span>涉及运行的变更会经过一道发布级别的闸口，覆盖零前置条件的引导、干净安装、产品行为、完整模型能力、生命周期恢复以及用户级验收。
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <p class="reveal eyebrow">How it differs</p>
+        <h2
+          class="reveal mt-5 font-display text-[clamp(1.9rem,3.6vw,2.9rem)] font-bold leading-[1.18] tracking-tight"
+        >
+          它有何不同
+        </h2>
+        <p class="reveal mt-6 text-[15px] leading-[2] text-muted">
+          ODS 自身的着力点，是这些工具之外的一层：检测你的硬件、选择并验证模型、生命周期命令（安装、更新、备份、卸载），以及一个扩展目录。
+        </p>
+
+        <div class="reveal mt-8 space-y-4">
+          {
+            compare.map(([tool, gives, extra]) => (
+              <article class="panel p-6 transition-colors duration-300 hover:border-amber/35">
+                <p class="font-mono text-[12px] tracking-wide text-amber">{tool}</p>
+                <p class="mt-3 text-[13px] leading-[1.85] text-faint">它给你：{gives}</p>
+                <p class="mt-2 text-[14px] leading-[1.9] text-ink">ODS 额外提供：{extra}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

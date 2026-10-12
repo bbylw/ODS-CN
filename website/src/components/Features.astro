@@ -1,0 +1,115 @@
+---
+const features = [
+  {
+    span: "md:col-span-3",
+    title: "本地模型推理",
+    tag: "llama-server",
+    desc: "在你自己的硬件上运行开源模型。高性能推理支持连续批处理，安装器会为你的 GPU 自动选择模型与后端。",
+    visual: "code",
+  },
+  {
+    span: "md:col-span-3",
+    title: "控制台 Dashboard",
+    tag: "localhost:3001",
+    desc: "从一处集中管理模型、服务、安装、GPU 状态与扩展：实时 GPU 指标、服务健康度、模型下载与切换。",
+    visual: "status",
+  },
+  {
+    span: "md:col-span-2",
+    title: "ChatGPT 风格的 Web 界面",
+    tag: "Open WebUI",
+    desc: "在任意浏览器中与你的模型对话：对话历史、Web 搜索、文档上传，支持 30+ 种语言。",
+  },
+  {
+    span: "md:col-span-2",
+    title: "语音、智能体与工作流",
+    tag: "Whisper · Kokoro · n8n",
+    desc: "构建能够听、说、调用工具并真正完成工作的自动化：语音转文本、文本转语音，以及 400+ 集成的工作流引擎。",
+  },
+  {
+    span: "md:col-span-2",
+    title: "RAG 与搜索",
+    tag: "Qdrant · SearXNG",
+    desc: "连接本地文档、私有搜索与检索工作流：向量数据库、无追踪的自托管搜索、深度研究引擎。",
+  },
+  {
+    span: "md:col-span-3",
+    title: "图像生成",
+    tag: "ComfyUI",
+    desc: "运行本地图像工具，而不把提示词发往任何托管 API。基于节点的工作流，全部留在你的机器上。",
+  },
+  {
+    span: "md:col-span-3",
+    title: "隐私与运维",
+    tag: "Privacy Shield · Token Spy",
+    desc: "将服务鉴权、密钥、可观测性与诊断集中在一个本地技术栈中，包括 PII 擦除代理与令牌用量监视。",
+  },
+];
+---
+
+<section id="features" class="relative border-b border-line">
+  <div class="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 lg:py-32">
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+      <div class="max-w-2xl">
+        <p class="reveal eyebrow">What's inside</p>
+        <h2
+          class="reveal mt-5 font-display text-[clamp(2rem,4.2vw,3.4rem)] font-bold leading-[1.15] tracking-tight"
+        >
+          一个完整的本地 AI 技术栈，
+          <span class="text-amber">而不是又一个模型服务器</span>
+        </h2>
+      </div>
+      <p class="reveal max-w-md text-[15px] leading-[1.95] text-muted">
+        ODS 建立在你可能已经在使用的工具之上，而不是取代它们。它安装这些工具，把它们串联起来，并给你一个统一的地方来运行它们。
+      </p>
+    </div>
+
+    <div class="mt-14 grid grid-cols-1 gap-5 md:grid-cols-6">
+      {
+        features.map((f, i) => (
+          <article
+            class={`reveal panel noise group relative flex flex-col overflow-hidden p-7 transition-all duration-300 hover:-translate-y-1 hover:border-amber/35 ${f.span}`}
+            style={`--reveal-delay: ${i * 70}ms`}
+          >
+            <div class="flex items-center justify-between gap-4">
+              <h3 class="font-display text-[21px] font-bold leading-snug tracking-tight text-ink">
+                {f.title}
+              </h3>
+              <span class="shrink-0 rounded-full border border-line px-2.5 py-1 font-mono text-[10px] tracking-wide text-faint transition-colors duration-300 group-hover:border-amber/40 group-hover:text-amber">
+                {f.tag}
+              </span>
+            </div>
+            <p class="mt-3.5 max-w-[46ch] text-[14.5px] leading-[1.9] text-muted">{f.desc}</p>
+
+            {f.visual === "code" && (
+              <div class="mt-6 rounded-xl border border-line bg-base-950/70 p-4 font-mono text-[11.5px] leading-[1.9] text-faint">
+                <p>
+                  <span class="text-amber">$</span> ods status
+                </p>
+                <p>
+                  <span class="text-moss">✓</span> llm llama-server 已就绪 · 64K ctx
+                </p>
+                <p>
+                  <span class="text-moss">✓</span> GPU 已检测 · CUDA / Metal / Vulkan
+                </p>
+              </div>
+            )}
+            {f.visual === "status" && (
+              <div class="mt-6 space-y-2">
+                {["模型管理", "服务健康度", "扩展目录"].map((row) => (
+                  <div class="flex items-center justify-between rounded-lg border border-line/70 bg-base-950/50 px-3.5 py-2.5">
+                    <span class="font-mono text-[11.5px] text-muted">{row}</span>
+                    <span class="flex items-center gap-1.5 font-mono text-[10px] text-moss">
+                      <span class="h-1.5 w-1.5 rounded-full bg-moss/80" />
+                      LIVE
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
